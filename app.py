@@ -35,6 +35,27 @@ def create_app(test_config=None):
         })
 
 
+    '''
+    @Done implement endpoint
+        GET /actors
+            it should require the 'get:actors' permission
+        returns status code 200 and json {"success": True, "actors": actors}
+        where actors is the list of actors
+            or appropriate status code indicating reason for failure
+    '''
+    @app.route('/acotors')
+    def get_actors():
+        data = Actor.query.all()
+        actors= list(map(Actor.get_actor, data))
+        if actors is None or len(actors) == 0:
+            abort(404)
+        return jsonify({
+            'success': True,
+            'actors': acotors
+        })
+
+
+
     # Error Handling
     '''
     @Done implement error handlers using the @app.errorhandler(error) decorator
@@ -96,14 +117,14 @@ def create_app(test_config=None):
     @Done implement error handler for AuthError
         error handler should conform to general task above
     '''
-    @app.errorhandler(AuthError)
-    def auth_error(error):
-        return jsonify({
-            "success": False,
-            "error": error.status_code,
-            "code": error.error['code'],
-            "message": error.error['description']
-        }), error.status_code
+    # @app.errorhandler(AuthError)
+    # def auth_error(error):
+    #     return jsonify({
+    #         "success": False,
+    #         "error": error.status_code,
+    #         "code": error.error['code'],
+    #         "message": error.error['description']
+    #     }), error.status_code
 
     return app
 
