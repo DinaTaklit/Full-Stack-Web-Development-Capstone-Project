@@ -16,7 +16,7 @@ def create_app(test_config=None):
     !! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
     !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
     '''
-    db_drop_and_create_all()
+    #db_drop_and_create_all()
 
     # ROUTES
     '''
@@ -34,6 +34,76 @@ def create_app(test_config=None):
             'message': 'hello world'
         })
 
+
+    # Error Handling
+    '''
+    @Done implement error handlers using the @app.errorhandler(error) decorator
+        each error handler should return (with approprate messages):
+                jsonify({
+                        "success": False,
+                        "error": 404,
+                        "message": "resource not found"
+                        }), 404
+
+    '''
+
+    '''
+    @Done implement error handler for 404
+        error handler should conform to general task above
+    '''
+    @app.errorhandler(404)
+    def not_found(error):
+        return jsonify({
+            "success": False,
+            "error": 404,
+            "message": "resource not found"
+        }), 404
+        
+    '''
+    @Done implement error handler for 400
+    '''
+    @app.errorhandler(400)
+    def bad_request(error):
+        return jsonify({
+            "success": False,
+            "error": 400,
+            "message": "bad request"
+        }), 400
+
+    '''
+    @Done implement error handler for 405
+    '''
+    @app.errorhandler(405)
+    def not_allowed(error):
+        return jsonify({
+            "success": False,
+            "error": 405,
+            "message": "method not allowed"
+        }), 405
+
+    '''
+    @Done implement error handler for 422
+    '''
+    @app.errorhandler(422)
+    def unprocessable(error):
+        return jsonify({
+            "success": False,
+            "error": 422,
+            "message": "unprocessable"
+        }), 422
+
+    '''
+    @Done implement error handler for AuthError
+        error handler should conform to general task above
+    '''
+    @app.errorhandler(AuthError)
+    def auth_error(error):
+        return jsonify({
+            "success": False,
+            "error": error.status_code,
+            "code": error.error['code'],
+            "message": error.error['description']
+        }), error.status_code
 
     return app
 
