@@ -1,5 +1,5 @@
 import os
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, String, Integer, DateTime
 from flask_sqlalchemy import SQLAlchemy
 import json
 import datetime
@@ -34,12 +34,12 @@ def db_drop_and_create_all():
 Movie
 a persistent movie entity, extends the base SQLAlchemy Model
 '''
-class Movie(db.model):
+class Movie(db.Model):
     __tablename__ = "movie"
     # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     # String Title
-    title = Column(String(80), nullable=false)
+    title = Column(String(80), nullable=False)
     # Release date
     release_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
     # Define parent-child relationship betw the Movie and Actor
@@ -105,16 +105,16 @@ Actor
 a persistent actor entity, extends the base SQLAlchemy Model
 '''
 
-class Actor(db.model):
+class Actor(db.Model):
     __tablename__ = "actor"
     # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     # String name
-    name = Column(String(80), nullable=false)
+    name = Column(String(80), nullable=False)
     # Integer age
     age = Column(Integer(), nullable=False)
     # String gender 
-    name = Column(String(80), nullable=false)
+    name = Column(String(80), nullable=False)
     # Add movie as foreight key for actor model 
     movie_id = Column(Integer(), db.ForeignKey("movie.id"))
     
