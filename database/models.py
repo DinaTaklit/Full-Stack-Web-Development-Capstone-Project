@@ -42,6 +42,8 @@ class Movie(db.model):
     title = Column(String(80), nullable=false)
     # Release date
     release_date = Column(DateTime, nullable=False, default=datetime.datetime.utcnow)
+    # Define parent-child relationship betw the Movie and Actor
+    actors = db.relationship("Actor", backref="movie")
     
     '''
     get_movie(self)
@@ -113,7 +115,9 @@ class Actor(db.model):
     age = Column(Integer(), nullable=False)
     # String gender 
     name = Column(String(80), nullable=false)
-
+    # Add movie as foreight key for actor model 
+    movie_id = Column(Integer(), db.ForeignKey("movie.id"))
+    
     '''
     get_actor(self)
         json form representation of the Actor model
