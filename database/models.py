@@ -55,7 +55,7 @@ class Movie(db.model):
             "realse_date": self.realse_date
         }
 
-        '''
+    '''
     insert()
         inserts a new model into a database
         the model must have a unique name
@@ -96,3 +96,66 @@ class Movie(db.model):
 
     def __repr__(self):
         return json.dumps(self.get_movie())
+
+
+'''
+Actor
+a persistent actor entity, extends the base SQLAlchemy Model
+'''
+
+class Actor(db.model):
+    __tablename__ = "actor"
+    # Autoincrementing, unique primary key
+    id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
+    # String name
+    name = Column(String(80), nullable=false)
+    # Integer age
+    age = Column(Integer(), nullable=False)
+    # String gender 
+    name = Column(String(80), nullable=false)
+
+    '''
+    get_actor(self)
+        json form representation of the Actor model
+    '''
+    
+    def get_actor(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'age': self.age,
+            'gender': self.gender
+        }
+        
+    '''
+    insert()
+        inserts a new model into a database
+        the model must have a unique name
+        the model must have a unique id or null id
+    '''
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    '''
+    delete()
+        deletes a new model into a database
+        the model must exist in the database
+    '''
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    '''
+    update()
+        updates a new model into a database
+        the model must exist in the database
+    '''
+
+    def update(self):
+        db.session.commit()
+
+    def __repr__(self):
+        return json.dumps(self.get_actor())
