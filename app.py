@@ -43,7 +43,7 @@ def create_app(test_config=None):
         where actors is the list of actors
             or appropriate status code indicating reason for failure
     '''
-    @app.route('/acotors')
+    @app.route('/actors')
     def get_actors():
         data = Actor.query.all()
         actors= list(map(Actor.get_actor, data))
@@ -51,7 +51,7 @@ def create_app(test_config=None):
             abort(404)
         return jsonify({
             'success': True,
-            'actors': acotors
+            'actors': actors
         })
 
 
