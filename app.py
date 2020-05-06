@@ -73,6 +73,37 @@ def create_app(test_config=None):
             'movies': movies
         })
 
+    '''
+    @TODO implement endpoint
+        POST /actors
+            it should create a new row in the actors table
+            it should require the 'post:actors' permission
+            it should contain the actor.get_actor data representation
+        returns status code 200 and json {"success": True, "actors": actor}
+            where actor an array containing only the newly created actor
+            or appropriate status code indicating reason for failure
+    '''
+    @app.route('/actors', methods=['POST'])
+    def post_actor():
+        body = request.get_json()
+        if body is None:
+            abort(404)
+        name = body.get('name', None)
+        age = body.get('age', None)
+        gender = body.get('gender', None)
+        # verify id there is no duplicate
+        duplicate = Actor.query.filter(Actor.name == name).one_or_none()
+        if duplicate is not None:
+            abort(400)
+        try:
+            new_actor = Actor(name=name, age=age, gender=gender)
+            new_actor.insert()
+            return jsonify({
+                'success': True,
+                'actors': [new_actor.get_actor()]
+            })
+        except Exception as error:
+            abort(422)
 
     # Error Handling
     '''
