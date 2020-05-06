@@ -54,6 +54,24 @@ def create_app(test_config=None):
             'actors': actors
         })
 
+    '''
+    @Done implement endpoint
+        GET /movies
+            it should require the 'get:movies' permission
+        returns status code 200 and json {"success": True, "movies": movies}
+        where movies is the list of movies
+            or appropriate status code indicating reason for failure
+    '''
+    @app.route('/movies')
+    def get_movies():
+        data = Movie.query.all()
+        movies= list(map(Movie.get_movie, data))
+        if movies is None or len(movies) == 0:
+            abort(404)
+        return jsonify({
+            'success': True,
+            'movies': movies
+        })
 
 
     # Error Handling
