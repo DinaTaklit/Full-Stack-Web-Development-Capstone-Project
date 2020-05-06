@@ -114,7 +114,7 @@ class Actor(db.Model):
     # Integer age
     age = Column(Integer(), nullable=False)
     # String gender 
-    name = Column(String(80), nullable=False)
+    gender = Column(String(80), nullable=False)
     # Add movie as foreight key for actor model 
     movie_id = Column(Integer(), db.ForeignKey("movie.id"))
     
