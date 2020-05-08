@@ -54,7 +54,7 @@ class Movie(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "realse_date": self.realse_date
+            "release_date": self.release_date
         }
 
     '''

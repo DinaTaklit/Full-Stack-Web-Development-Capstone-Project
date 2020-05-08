@@ -16,7 +16,7 @@ def create_app(test_config=None):
     !! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
     !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
     '''
-    #db_drop_and_create_all()
+    db_drop_and_create_all()
 
     # ROUTES
     '''
@@ -101,6 +101,39 @@ def create_app(test_config=None):
             return jsonify({
                 'success': True,
                 'actors': [new_actor.get_actor()]
+            })
+        except Exception as error:
+            abort(422)
+
+    '''
+    @TODO implement endpoint
+        POST /movies
+            it should create a new row in the movies table
+            it should require the 'post:movies' permission
+            it should contain the movie.get_movie data representation
+        returns status code 200 and json {"success": True, "movies": movie}
+            where movie an array containing only the newly created movie
+            or appropriate status code indicating reason for failure
+    '''
+    @app.route('/movies', methods=['POST'])
+    def post_movie():
+        body = request.get_json()
+        if 'title' not in body :
+            abort(404)
+        title = body.get('title', None)
+        release_date = body.get('release_date', None)
+        # verify id there is no duplicate
+        duplicate = Movie.query.filter(Movie.title == title).one_or_none()
+        if duplicate is not None:
+            abort(400)
+        try:
+            new_movie = Movie(title=title, release_date=release_date)
+            print("\n new_movie after: \n",new_movie.get_movie())
+            new_movie.insert()
+            print("The movie was inserted")
+            return jsonify({
+                'success': True,
+                'movies': [new_movie.get_movie()]
             })
         except Exception as error:
             abort(422)
