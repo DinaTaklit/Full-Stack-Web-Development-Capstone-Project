@@ -138,6 +138,48 @@ def create_app(test_config=None):
         except Exception as error:
             abort(422)
 
+
+    '''
+    @TODO implement endpoint
+        PATCH /actors/<actor id>
+            it should update an existing row in the actors table
+            it should require the 'patch:actors' permission
+            it should contain the actor.get_actor data representation
+        returns status code 200 and json {"success": True, "actors": actor}
+            where actor an array containing only the updated actor
+            or appropriate status code indicating reason for failure
+    '''
+    @app.route('/actors/<int:actor_id>', methods=['PATCH'])
+    def update_actor(actor_id):
+        # get the element with given id
+        actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
+        if actor is None:
+            abort(404)
+        body = request.get_json()  # get the body
+        if body is None:
+            abort(404)
+            
+        updated_name = body.get('name', None)
+        updated_age = body.get('age', None)
+        updated_gender = body.get('gender', None)
+
+        if updated_name is not None:
+            actor.name = updated_name
+        if updated_age is not None:
+            actor.age = updated_age     
+        if updated_gender is not None:
+            actor.gender = updated_gender
+  
+        try:
+            actor.update()  # update the record
+            return jsonify({
+                'success': True,
+                'actors': [actor.get_actor()]
+            })
+        except Exception as error:
+            abort(422)
+
+
     # Error Handling
     '''
     @Done implement error handlers using the @app.errorhandler(error) decorator
