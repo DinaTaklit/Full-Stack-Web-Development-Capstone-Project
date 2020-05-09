@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
 from database.models import db_drop_and_create_all, setup_db, Movie, Actor
+from auth.auth import AuthError, requires_auth
 
 def create_app(test_config=None):
     # create and configure the app
@@ -17,6 +18,15 @@ def create_app(test_config=None):
     !! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
     '''
     db_drop_and_create_all()
+
+
+    @app.after_request
+    def after_request(response):
+        response.headers.add('Access-Control-Allow-Headers',
+                            'Content-Type, Authorization, true')
+        response.headers.add('Access-Control-Allow-Methods',
+                            'GET, PATCH, POST, DELETE, OPTIONS')
+        return response
 
     # ROUTES
     '''
@@ -333,14 +343,14 @@ def create_app(test_config=None):
     @Done implement error handler for AuthError
         error handler should conform to general task above
     '''
-    # @app.errorhandler(AuthError)
-    # def auth_error(error):
-    #     return jsonify({
-    #         "success": False,
-    #         "error": error.status_code,
-    #         "code": error.error['code'],
-    #         "message": error.error['description']
-    #     }), error.status_code
+    @app.errorhandler(AuthError)
+    def auth_error(error):
+        return jsonify({
+            "success": False,
+            "error": error.status_code,
+            "code": error.error['code'],
+            "message": error.error['description']
+        }), error.status_code
 
     return app
 
