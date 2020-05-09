@@ -218,6 +218,32 @@ def create_app(test_config=None):
         except Exception as error:
             abort(422)
 
+    '''
+    @TODO implement endpoint
+        DELETE /actors/<id>
+            where <id> is the existing model id
+            it should respond with a 404 error if <id> is not found
+            it should delete the corresponding row for <id>
+            it should require the 'delete:actors' permission
+        returns status code 200 and json {"success": True, "delete": id}
+            where id is the id of the deleted record
+            or appropriate status code indicating reason for failure
+    '''
+    @app.route('/actors/<actor_id>', methods=['DELETE'])
+    def delete_actor(actor_id):
+        # get the actor to delete
+        selected_actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
+        if selected_actor is None:
+            abort(404)
+        try:
+            selected_actor.delete()  # delete the item
+            return jsonify({
+                "success": True,
+                "delete": actor_id
+            })
+        except Exception as error:
+            abort(422)
+
 
 
     # Error Handling
