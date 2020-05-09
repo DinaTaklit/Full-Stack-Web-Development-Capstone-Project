@@ -1,0 +1,9 @@
+export AUTH0_DOMAIN='coffee-shop-application.auth0.com' # the auth0 domain 
+export ALGORITHMS=['RS256']
+export API_AUDIENCE='capstone-app' # the audience set for the auth0 app
+export CLIENT_ID='p1U7BG6MaJxHOSEJzrdNwFsVrC9CZjnR' # the client id generated for the auth0 app
+export ASSISTANT_JWT=''
+export DIRECTOR_JWT=''
+export PRODUCER_JWT=''
+export FLASK_APP=app.py
+export FLASK_ENV=development
