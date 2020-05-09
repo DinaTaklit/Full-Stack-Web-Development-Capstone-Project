@@ -180,6 +180,46 @@ def create_app(test_config=None):
             abort(422)
 
 
+    '''
+    @TODO implement endpoint
+        PATCH /movies/<movie id>
+            it should update an existing row in the movies table
+            it should require the 'patch:movies' permission
+            it should contain the movie.get_movie data representation
+        returns status code 200 and json {"success": True, "movies": movie}
+            where movie an array containing only the updated movie
+            or appropriate status code indicating reason for failure
+    '''
+    @app.route('/movies/<int:movie_id>', methods=['PATCH'])
+    def update_movie(movie_id):
+        # get the element with given id
+        movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
+        if movie is None:
+            abort(404)
+        body = request.get_json()  # get the body
+        if body is None:
+            abort(404)
+            
+        updated_title = body.get('title', None)
+        updated_release_date = body.get('release_date', None)
+
+
+        if updated_title is not None:
+            movie.title = updated_title
+        if updated_release_date is not None:
+            movie.release_date = updated_release_date     
+  
+        try:
+            movie.update()  # update the record
+            return jsonify({
+                'success': True,
+                'movies': [movie.get_movie()]
+            })
+        except Exception as error:
+            abort(422)
+
+
+
     # Error Handling
     '''
     @Done implement error handlers using the @app.errorhandler(error) decorator
