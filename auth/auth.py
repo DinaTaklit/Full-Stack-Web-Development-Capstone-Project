@@ -96,8 +96,6 @@ def check_permissions(permission, payload):
         }, 403)
     return True
 
-
-
 '''
 @Done implement verify_decode_jwt(token) method
     @INPUTS
@@ -115,6 +113,7 @@ def verify_decode_jwt(token):
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
     if 'kid' not in unverified_header:
+        logging.info('invalid_header, Authorization malformed')
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization malformed.'
@@ -143,21 +142,25 @@ def verify_decode_jwt(token):
             return payload
 
         except jwt.ExpiredSignatureError:
+            logging.info('Token expired')
             raise AuthError({
                 'code': 'token_expired',
                 'description': 'Token expired.'
             }, 401)
 
         except jwt.JWTClaimsError:
+            logging.info('invalid_claims, Incorrect claims. Please, check the audience and issuer.')
             raise AuthError({
                 'code': 'invalid_claims',
                 'description': 'Incorrect claims. Please, check the audience and issuer.'
             }, 401)
         except Exception:
+            logging.info('invalid_header, Unable to parse authentication token.')
             raise AuthError({
                 'code': 'invalid_header',
                 'description': 'Unable to parse authentication token.'
             }, 400)
+    logging.info('invalid_header, Unable to find the appropriate key.')
     raise AuthError({
                 'code': 'invalid_header',
                 'description': 'Unable to find the appropriate key.'
