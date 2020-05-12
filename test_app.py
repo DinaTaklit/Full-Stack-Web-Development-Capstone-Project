@@ -68,6 +68,41 @@ class CastingTestCase(unittest.TestCase):
         pass 
     
     
+    #Define your tests. All should begin with "test_" and include a doc string about the purpose of the test. In defining the tests, you will need to:
+    #1. Get the response by having the client make a request
+    #2. Use self.assertEqual to check the status code and all other relevant operations.
+    # def test_given_behavior(self):
+    #     """Test ____________ """
+    #     res = self.client().get('/')
+    #     self.assertEqual(res.status_code, 200)
+    
+    
+    ################################################
+    #####           Actor Tests                #####
+    ################################################
+    # test get actors end point 
+    def test_get_actors_casting_assistant(self):
+        res = self.client().get('/actors', headers=setup_auth("casting_assistant"))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['actors']))
+        
+    def test_get_actors_casting_director(self):
+        res = self.client().get('/actors', headers=setup_auth("casting_director"))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['actors']))  
+    
+    def test_get_actors_executive_producer(self):
+        res = self.client().get('/actors', headers=setup_auth("executive_producer"))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['actors']))  
+
+    
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
     unittest.main()
