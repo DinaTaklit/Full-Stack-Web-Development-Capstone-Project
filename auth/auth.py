@@ -82,12 +82,14 @@ def get_token_auth_header():
 '''
 def check_permissions(permission, payload):
     if 'permissions' not in payload:
+        logging.info('invalid_claims, Permissions not included in JWT.')
         raise AuthError({
             'code': 'invalid_claims',
             'description': 'Permissions not included in JWT.'
         }, 400)
 
     if permission not in payload['permissions']:
+        logging.info('unauthorized, Permission not found.')
         raise AuthError({
             'code': 'unauthorized',
             'description': 'Permission not found.'
