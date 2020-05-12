@@ -16,5 +16,22 @@ database_path = "sqlite:///{}".format(os.path.join(project_dir, database_name))
 
 casting_assistant_token = os.getenv('CASTING_ASSISTANT_JWT')
 casting_director_token = os.getenv('CASTING_DIRECTOR_JWT')
-ecxcutive_producer_token = os.getenv('EXECUTIVE_PRODUCER_JWT')
+executive_producer_token = os.getenv('EXECUTIVE_PRODUCER_JWT')
 
+# define set authetification method 
+def setup_auth(role):
+    if role == 'casting_assistant':
+        return {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer {}".format(casting_assistant_token)
+            }
+    elif role == 'casting_director':
+        return {
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer {}'.format(casting_director_token)
+            }
+    elif role == 'executive_producer':
+        return {
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer {}'.format(executive_producer_token)
+            }
