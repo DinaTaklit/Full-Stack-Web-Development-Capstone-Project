@@ -41,24 +41,28 @@ def get_token_auth_header():
     auth = request.headers.get('Authorization', None) # get the authorization part of the request headers
  
     if not auth: # the header is missing
+        logging.info('Authorization header is missing')
         raise AuthError({
             'code': 'authorization_header_missing',
             'description': 'Authorization header is expected.'
         }, 401)
     parts = auth.split() # the header must contain the bearer + token
     if parts[0].lower() != 'bearer': 
+        logging.info('invalid_header, Authorization header must start with "Bearer')
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization header must start with "Bearer".'
         }, 401)
     
     elif len(parts) == 1:
+        logging.info('invalid_header, Token not found')
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Token not found.'
         }, 401)
 
     elif len(parts) > 2:
+        logging.info('invalid_header, Authorization header must be bearer token.')
         raise AuthError({
             'code': 'invalid_header',
             'description': 'Authorization header must be bearer token.'
