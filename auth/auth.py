@@ -4,9 +4,17 @@ from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
 
+import logging
+from logging import FileHandler, Formatter
+
 AUTH0_DOMAIN = 'coffee-shop-application.auth0.com'  # The domaine url 
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'capstone-app' # The api audiance
+
+## Configure the logging
+logging.basicConfig(filename='error.log', level=logging.INFO,
+                    format='%(asctime)s %(levelname)s: %(message)s')
+
 
 ## AuthError Exception
 '''
@@ -29,7 +37,9 @@ class AuthError(Exception):
     return the token part of the header
 '''
 def get_token_auth_header():
+    # print("request.headers", request.headers)
     auth = request.headers.get('Authorization', None) # get the authorization part of the request headers
+ 
     if not auth: # the header is missing
         raise AuthError({
             'code': 'authorization_header_missing',
@@ -41,7 +51,7 @@ def get_token_auth_header():
             'code': 'invalid_header',
             'description': 'Authorization header must start with "Bearer".'
         }, 401)
-
+    
     elif len(parts) == 1:
         raise AuthError({
             'code': 'invalid_header',
@@ -53,7 +63,6 @@ def get_token_auth_header():
             'code': 'invalid_header',
             'description': 'Authorization header must be bearer token.'
         }, 401)
-
     token = parts[1]
     return token
 
@@ -113,7 +122,6 @@ def verify_decode_jwt(token):
                 'n': key['n'],
                 'e': key['e']
             }
-
     if rsa_key:
         try:
             payload = jwt.decode(
@@ -121,8 +129,10 @@ def verify_decode_jwt(token):
                 rsa_key,
                 algorithms=ALGORITHMS,
                 audience=API_AUDIENCE,
-                issuer='https://' + AUTH0_DOMAIN + '/'
+                issuer='https://' + AUTH0_DOMAIN + '/',
+                options={'verify_exp':False}
             )
+            print("\n payload => \n{}\n".format(payload))
 
             return payload
 
@@ -146,7 +156,6 @@ def verify_decode_jwt(token):
                 'code': 'invalid_header',
                 'description': 'Unable to find the appropriate key.'
             }, 400)
-
 '''
 @Done implement @requires_auth(permission) decorator method
     @INPUTS
@@ -163,8 +172,10 @@ def requires_auth(permission=''):
         @wraps(f)
         def wrapper(*args, **kwargs):
             token = get_token_auth_header()
+            print("\nWe got the token :D\n")
             try:
                 payload = verify_decode_jwt(token)
+                print("\npayload\n", payload)
             except:
                 abort(401)
             check_permissions(permission, payload)
