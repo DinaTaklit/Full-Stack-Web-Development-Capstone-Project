@@ -53,7 +53,7 @@ def get_token_auth_header():
             'code': 'invalid_header',
             'description': 'Authorization header must start with "Bearer".'
         }, 401)
-    
+
     elif len(parts) == 1:
         logging.info('invalid_header, Token not found')
         raise AuthError({
@@ -126,7 +126,7 @@ def verify_decode_jwt(token):
                 'use': key['use'],
                 'n': key['n'],
                 'e': key['e']
-            }
+        }
     if rsa_key:
         try:
             payload = jwt.decode(
@@ -134,11 +134,8 @@ def verify_decode_jwt(token):
                 rsa_key,
                 algorithms=ALGORITHMS,
                 audience=API_AUDIENCE,
-                issuer='https://' + AUTH0_DOMAIN + '/',
-                options={'verify_exp':False}
+                issuer='https://' + AUTH0_DOMAIN + '/'     
             )
-            print("\n payload => \n{}\n".format(payload))
-
             return payload
 
         except jwt.ExpiredSignatureError:
@@ -154,8 +151,9 @@ def verify_decode_jwt(token):
                 'code': 'invalid_claims',
                 'description': 'Incorrect claims. Please, check the audience and issuer.'
             }, 401)
-        except Exception:
-            logging.info('invalid_header, Unable to parse authentication token.')
+        except Exception as e:
+            logging.error("invalid_header, Unable to parse authentication token.", exc_info=True)
+            #logging.info('invalid_header, Unable to parse authentication token.')
             raise AuthError({
                 'code': 'invalid_header',
                 'description': 'Unable to parse authentication token.'
