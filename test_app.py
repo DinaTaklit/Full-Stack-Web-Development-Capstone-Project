@@ -3,8 +3,8 @@ import unittest
 import json
 from flask_sqlalchemy import SQLAlchemy
 from app import create_app 
-from models import db, db_drop_and_create_all, setup_db, Movie, Actor
-from auth import AuthError, requires_auth
+from database.models import db, db_drop_and_create_all, setup_db, Movie, Actor
+from auth.auth import AuthError, requires_auth
 from sqlalchemy import Column, String, Integer, DateTime
 import logging
 from configparser import ConfigParser
@@ -35,3 +35,39 @@ def setup_auth(role):
             "Content-Type": "application/json",
             'Authorization': 'Bearer {}'.format(executive_producer_token)
             }
+#Define the test case class for the application (or section of the application, for larger applications).
+class CastingTestCase(unittest.TestCase):
+    #Define and implement the setUp function. It will be executed before each test and is where you should initialize the app and test client, as well as any other context your tests will need. The Flask library provides a test client for the application, accessed as shown below.
+    def setUp(self):
+        """Define test variables and initialize app."""
+        self.app = create_app()      
+        self.client = self.app.test_client
+        self.database_name = database_name
+        self.database_path = database_path
+        setup_db(self.app, self.database_path)
+        
+        self.new_actor = {
+            "name": "Test Acotor",
+            "age": 24,
+            "gender":"female"
+        }
+        self.new_movie = {
+            "title":"Test Movie"
+        }
+        #binds the app to the current context 
+        with self.app.app_context():
+            self.db = SQLAlchemy()
+            self.db.init_app(self.app)
+            self.db.drop_all()
+            # create all tables
+            self.db.create_all() 
+            
+    #Define the tearDown method, which is implemented after each test. It will run as long as setUp executes successfully, regardless of test success.
+    def tearDown(self):
+        """ Executed after each test """
+        pass 
+    
+    
+#Run the test suite, by running python test_file_name.py from the command line.
+if __name__ == "__main__":
+    unittest.main()
