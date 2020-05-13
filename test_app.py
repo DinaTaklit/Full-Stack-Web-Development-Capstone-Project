@@ -126,6 +126,12 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(len(data['actors']))
+        
+    def test_422_post_actors_fail(self):
+        res = self.client().post('/actors', json={}, headers=setup_auth('casting_director'))
+        data = json.loads(res.data)  
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data['success'], False)
     
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
