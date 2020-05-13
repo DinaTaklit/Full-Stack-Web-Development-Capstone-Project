@@ -142,9 +142,7 @@ def create_app(test_config=None):
             abort(400)
         try:
             new_movie = Movie(title=title, release_date=release_date)
-            print("\n new_movie after: \n", new_movie.get_movie())
             new_movie.insert()
-            print("The movie was inserted")
             return jsonify({
                 'success': True,
                 'movies': [new_movie.get_movie()]
