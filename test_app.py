@@ -81,7 +81,7 @@ class CastingTestCase(unittest.TestCase):
     #####           Actor Tests                #####
     ################################################
     
-    # test get actors end points 
+    # test get actors end point
     def test_get_actors_casting_assistant(self):
         res = self.client().get('/actors', headers=setup_auth("casting_assistant"))
         data = json.loads(res.data)
@@ -107,7 +107,7 @@ class CastingTestCase(unittest.TestCase):
         res = self.client().get('/actors', headers=setup_auth(''))
         self.assertEqual(res.status_code, 401)
     
-    # test post actors end points      
+    # test post actors end point     
     def test_post_actor_casting_assistant(self):
         res = self.client().post('/actors', json=self.new_actor,
                             headers=setup_auth('casting_assistant'))
@@ -133,7 +133,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data['success'], False)
         
-    # test patch actors end points 
+    # test patch actors end point 
     def test_patch_actor_casting_assistant(self):
         res = self.client().patch('/actors/1', json={'age':25},
                              headers=setup_auth('casting_assistant'))
@@ -150,7 +150,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.get_json()['success'], True)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(actor.getActor()['age'], 25)
+        self.assertEqual(actor.get_actor()['age'], 25)
         
     def test_patch_actor_executive_producer(self):
         res = self.client().patch('/actors/1', json={'age':25},
@@ -162,7 +162,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.get_json()['success'], True)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(actor.getActor()['age'], 25)
+        self.assertEqual(actor.get_actor()['age'], 25)
     
     def test_404_patch_actor_fail(self):
         res = self.client().patch('/actors/100000', json={},
@@ -172,7 +172,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'resource not found')
 
-    # test delete actors end points    
+    # test delete actors end point   
     def test_delete_actor_casting_assistant(self):
         res = self.client().delete('/actors/1', headers=setup_auth('casting_assistant'))
         self.assertEqual(res.status_code, 401)
@@ -238,9 +238,7 @@ class CastingTestCase(unittest.TestCase):
     def test_post_movie_casting_director(self):
         res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('casting_director'))
         data = json.loads(res.data)    
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(data['success'], True)
-        self.assertTrue(len(data['movies']))
+        self.assertEqual(res.status_code, 401)
         
     def test_post_movie_executive_producer(self):
         res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('executive_producer'))
@@ -293,6 +291,24 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'resource not found')
+    
+    # test delete movies end point   
+    def test_delete_movie_casting_assistant(self):
+        res = self.client().delete('/movies/1', headers=setup_auth('casting_assistant'))
+        self.assertEqual(res.status_code, 401)
+
+    def test_delete_movie_casting_director(self):
+        res = self.client().delete('/movies/1', headers=setup_auth('casting_director'))
+        self.assertEqual(res.status_code, 401)
+  
+    def test_delete_movie_executive_producer(self):
+        res = self.client().delete('/movies/1', headers=setup_auth('executive_producer'))
+        data = json.loads(res.data)   
+        movie = Movie.query.filter(Movie.id == 1).one_or_none()      
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(data['deleted'], 1)
+        self.assertEqual(movie,None)
 
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
