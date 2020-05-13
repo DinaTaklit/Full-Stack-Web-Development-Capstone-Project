@@ -194,7 +194,10 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertEqual(data['deleted'], 1)
         self.assertEqual(actor,None)
-        
+    
+    def test_401_delete_actor_fail(self):
+        res = self.client().delete('/actors/1', headers=setup_auth(''))
+        self.assertEqual(res.status_code, 401)
   
     
 #Run the test suite, by running python test_file_name.py from the command line.
