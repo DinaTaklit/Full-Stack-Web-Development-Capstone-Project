@@ -104,24 +104,24 @@ class CastingTestCase(unittest.TestCase):
         self.assertTrue(len(data['actors']))  
         
     def test_401_get_actor_fail(self):
-        res = self.app.get('/actors', headers=setup_auth(''))
+        res = self.client().get('/actors', headers=setup_auth(''))
         self.assertEqual(res.status_code, 401)
     
     # test post actors end points      
     def test_post_actor_casting_assistant(self):
-        res = self.app.post('/actors', json=self.new_actor,
+        res = self.client().post('/actors', json=self.new_actor,
                             headers=setup_auth('casting_assistant'))
         self.assertEqual(res.status_code, 401)    
                
     def test_post_actor_casting_director(self):
-        res = self.app.post('/actors', json=self.new_actor, headers=setup_auth('casting_director'))
+        res = self.client().post('/actors', json=self.new_actor, headers=setup_auth('casting_director'))
         data = json.loads(res.data)    
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(len(data['actors']))
         
     def test_post_actor_executive_producer(self):
-        res = self.app.post('/actors', json=self.new_actor, headers=setup_auth('executive_producer'))
+        res = self.client().post('/actors', json=self.new_actor, headers=setup_auth('executive_producer'))
         data = json.loads(res.data)   
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
