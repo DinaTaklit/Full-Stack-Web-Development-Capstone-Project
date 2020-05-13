@@ -257,7 +257,7 @@ class CastingTestCase(unittest.TestCase):
 
     # test patch movies end points 
     def test_patch_movie_casting_assistant(self):
-        res = self.client().patch('/movies/1', json={'age':25},
+        res = self.client().patch('/movies/1', json={'title':'updated_movie'},
                              headers=setup_auth('casting_assistant'))
         self.assertEqual(res.status_code, 401)
         
