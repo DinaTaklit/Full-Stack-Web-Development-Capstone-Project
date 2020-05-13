@@ -285,6 +285,14 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(movie.get_movie()['title'], 'updated_movie')
+    
+    def test_404_patch_movie_fail(self):
+        res = self.client().patch('/movies/100000', json={},
+                             headers=setup_auth('executive_producer'))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'resource not found')
 
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
