@@ -253,7 +253,7 @@ def create_app(test_config=None):
             selected_actor.delete()  # delete the item
             return jsonify({
                 "success": True,
-                "delete": actor_id
+                "deleted": actor_id
             })
         except Exception as error:
             abort(422)
@@ -280,7 +280,7 @@ def create_app(test_config=None):
             selected_movie.delete()  # delete the item
             return jsonify({
                 "success": True,
-                "delete": movie_id
+                "deleted": movie_id
             })
         except Exception as error:
             abort(422)
