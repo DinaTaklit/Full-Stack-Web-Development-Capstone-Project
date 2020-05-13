@@ -80,7 +80,8 @@ class CastingTestCase(unittest.TestCase):
     ################################################
     #####           Actor Tests                #####
     ################################################
-    # test get actors end point 
+    
+    # test get actors end points 
     def test_get_actors_casting_assistant(self):
         res = self.client().get('/actors', headers=setup_auth("casting_assistant"))
         data = json.loads(res.data)
@@ -105,7 +106,26 @@ class CastingTestCase(unittest.TestCase):
     def test_401_get_actor_fail(self):
         res = self.app.get('/actors', headers=setup_auth(''))
         self.assertEqual(res.status_code, 401)
+    
+    # test post actors end points      
+    def test_post_actor_casting_assistant(self):
+        res = self.app.post('/actors', json=self.new_actor,
+                            headers=setup_auth('casting_assistant'))
+        self.assertEqual(res.status_code, 401)    
                
+    def test_post_actor_casting_director(self):
+        res = self.app.post('/actors', json=self.new_actor, headers=setup_auth('casting_director'))
+        data = json.loads(res.data)    
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['actors']))
+        
+    def test_post_actor_executive_producer(self):
+        res = self.app.post('/actors', json=self.new_actor, headers=setup_auth('executive_producer'))
+        data = json.loads(res.data)   
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['actors']))
     
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
