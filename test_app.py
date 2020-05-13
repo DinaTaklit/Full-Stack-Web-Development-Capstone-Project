@@ -133,7 +133,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data['success'], False)
         
-    # test path actors end points 
+    # test patch actors end points 
     def test_patch_actor_casting_assistant(self):
         res = self.client().patch('/actors/1', json={'age':25},
                              headers=setup_auth('casting_assistant'))
@@ -163,10 +163,39 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(actor.getActor()['age'], 25)
-        
-        
+    
+    def test_404_patch_actor_fail(self):
+        res = self.client().patch('/actors/100000', json={},
+                             headers=setup_auth('executive_producer'))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'resource not found')
 
-     
+    # test delete actors end points    
+    def test_delete_actor_casting_assistant(self):
+        res = self.client().delete('/actors/1', headers=setup_auth('casting_assistant'))
+        self.assertEqual(res.status_code, 401)
+
+    def test_delete_actor_casting_director(self):
+        res = self.client().delete('/actors/1', headers=setup_auth('casting_director'))
+        data = json.loads(res.data)   
+        actor = Actor.query.filter(Actor.id == 1).one_or_none()      
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(data['deleted'], 1)
+        self.assertEqual(actor,None)
+        
+    def test_delete_actor_executive_producer(self):
+        res = self.client().delete('/actors/1', headers=setup_auth('executive_producer'))
+        data = json.loads(res.data)   
+        actor = Actor.query.filter(Actor.id == 1).one_or_none()      
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(data['deleted'], 1)
+        self.assertEqual(actor,None)
+        
+  
     
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
