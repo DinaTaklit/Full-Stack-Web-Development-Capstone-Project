@@ -229,6 +229,27 @@ class CastingTestCase(unittest.TestCase):
         res = self.client().get('/movies', headers=setup_auth(''))
         self.assertEqual(res.status_code, 401)
     
+    # test post movies end point      
+    def test_post_movie_casting_assistant(self):
+        res = self.client().post('/movies', json=self.new_movie,
+                            headers=setup_auth('casting_assistant'))
+        self.assertEqual(res.status_code, 401)    
+               
+    def test_post_movie_casting_director(self):
+        res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('casting_director'))
+        data = json.loads(res.data)    
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['movies']))
+        
+    def test_post_movie_executive_producer(self):
+        res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('executive_producer'))
+        data = json.loads(res.data)   
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['movies']))
+        
+        
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
     unittest.main()
