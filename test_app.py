@@ -249,7 +249,43 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(len(data['movies']))
         
+    def test_422_post_movies_fail(self):
+        res = self.client().post('/actors', json={}, headers=setup_auth('casting_director'))
+        data = json.loads(res.data)  
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data['success'], False)  
+
+    # test patch movies end points 
+    def test_patch_movie_casting_assistant(self):
+        res = self.client().patch('/movies/1', json={'age':25},
+                             headers=setup_auth('casting_assistant'))
+        self.assertEqual(res.status_code, 401)
         
+        
+    def test_patch_movie_casting_director(self):
+        res = self.client().patch('/movies/1', json={'title':'updated_movie'},
+                             headers=setup_auth('casting_director'))
+        
+        data = json.loads(res.data)
+        movie = Movie.query.filter(Movie.id == 1).one_or_none() 
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.get_json()['success'], True)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(movie.get_movie()['title'], 'updated_movie')
+        
+    def test_patch_movie_executive_producer(self):
+        res = self.client().patch('/movies/1', json={'title':'updated_movie'},
+                             headers=setup_auth('executive_producer'))
+        
+        data = json.loads(res.data)
+        movie = movie.query.filter(movie.id == 1).one_or_none() 
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.get_json()['success'], True)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(movie.get_movie()['title'], 'updated_movie')
+
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
     unittest.main()
