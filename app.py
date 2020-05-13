@@ -96,7 +96,8 @@ def create_app(test_config=None):
             or appropriate status code indicating reason for failure
     '''
     @app.route('/actors', methods=['POST'])
-    def post_actor():
+    @requires_auth('post:actors')
+    def post_actor(payload):
         body = request.get_json()
         if body is None:
             abort(404)
@@ -128,7 +129,8 @@ def create_app(test_config=None):
             or appropriate status code indicating reason for failure
     '''
     @app.route('/movies', methods=['POST'])
-    def post_movie():
+    @requires_auth('post:movies')
+    def post_movie(payload):
         body = request.get_json()
         if 'title' not in body:
             abort(404)
