@@ -895,7 +895,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJqbEZSakU1UmpVd01EaEJNa015TlVWQk5UbEVPRE5HUWpnMU1rSTVOekJHUlVKRE56VkZSUSJ9.eyJpc3MiOiJodHRwczovL2NvZmZlZS1zaG9wLWFwcGxpY2F0aW9uLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZTcxMTI0MTUyZWI5ZDBkMTg2MGQxZTAiLCJhdWQiOiJjYXBzdG9uZS1hcHAiLCJpYXQiOjE1ODk0MDk2MjksImV4cCI6MTU4OTQ5NjAyOSwiYXpwIjoicDFVN0JHNk1hSnhIT1NFSnpyZE53RnNWckM5Q1pqblIiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDphY3RvcnMiLCJnZXQ6bW92aWVzIl19.DkeAYRKQNHpMB97m3rzp1Efftl-exLeqmippqfGzjACq6VjImOtqLTeLyGdBzBSVZMqD9i43t-IZB_Yuo8FdLMGUfd64NANkZYsOHtCL18cdFaxO6Ts7ejsobT1MGlOfig1FUFV3JDVGJENdnEg3ffNk2uK6ZRp12zthpm8lyFv-Pz6PLKPBl_jTXnvswj1w4inj7nDmqx-Rs9EsyziPaCmDusDb_XIkwVmy6qatGp06kxw498Bl5jKfi2uMkLTgFo3sC8WfVfad7O7AbHHhWgrmUn2NeALXzskNFzpD8sc7a9MldFOSCSBaVGpfgALhiBHTpAb9VAGz_7LnO6_ppg",
 						"type": "string"
 					}
 				]
@@ -949,7 +949,7 @@
 	],
 	"variable": [
 		{
-			"id": "e14b183d-2722-4f23-89b7-e99699ab1036",
+			"id": "5e8817f3-2230-4e3c-89cd-5a8c821918d4",
 			"key": "host",
 			"value": "localhost:5000",
 			"type": "string"
