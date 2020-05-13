@@ -163,7 +163,8 @@ def create_app(test_config=None):
             or appropriate status code indicating reason for failure
     '''
     @app.route('/actors/<int:actor_id>', methods=['PATCH'])
-    def update_actor(actor_id):
+    @requires_auth('patch:actors')
+    def update_actor(payload, actor_id):
         # get the element with given id
         actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
         if actor is None:
@@ -203,7 +204,8 @@ def create_app(test_config=None):
             or appropriate status code indicating reason for failure
     '''
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
-    def update_movie(movie_id):
+    @requires_auth('patch:movies')
+    def update_movie(payload, movie_id):
         # get the element with given id
         movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
         if movie is None:
@@ -241,7 +243,8 @@ def create_app(test_config=None):
             or appropriate status code indicating reason for failure
     '''
     @app.route('/actors/<actor_id>', methods=['DELETE'])
-    def delete_actor(actor_id):
+    @requires_auth('delete:actors')
+    def delete_actor(payload, actor_id):
         # get the actor to delete
         selected_actor = Actor.query.filter(Actor.id == actor_id).one_or_none()
         if selected_actor is None:
@@ -267,7 +270,8 @@ def create_app(test_config=None):
             or appropriate status code indicating reason for failure
     '''
     @app.route('/movies/<movie_id>', methods=['DELETE'])
-    def delete_movie(movie_id):
+    @requires_auth('delete:movies')
+    def delete_movie(payload, movie_id):
         # get the movie to delete
         selected_movie = Movie.query.filter(Movie.id == movie_id).one_or_none()
         if selected_movie is None:
@@ -356,7 +360,6 @@ def create_app(test_config=None):
 
 APP = create_app()
 
-#APP.config.from_object('configmodule.DevelopmentConfig')
 if __name__ == '__main__':
     #APP.run(host='0.0.0.0', port=8080, debug=False)
     APP.run(debug=True)
