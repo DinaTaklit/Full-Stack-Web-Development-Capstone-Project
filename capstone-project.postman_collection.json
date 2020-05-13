@@ -398,7 +398,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Updated Movie 2\",\n    \"release_date\": \"May 13, 2020\"\n}"
+							"raw": "{\n    \"title\": \"Updated Movie 2\"\n}"
 						},
 						"url": {
 							"raw": "{{host}}/movies/1",
@@ -507,7 +507,7 @@
 					"response": []
 				},
 				{
-					"name": "/actors/2",
+					"name": "/actors/1",
 					"event": [
 						{
 							"listen": "test",
@@ -535,13 +535,13 @@
 							"raw": "{\n    \"name\": \"Updated Actor2\",\n    \"age\": 25,\n    \"gender\": \"female\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/actors/2",
+							"raw": "{{host}}/actors/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"actors",
-								"2"
+								"1"
 							]
 						},
 						"description": "Update actors in database"
@@ -549,7 +549,7 @@
 					"response": []
 				},
 				{
-					"name": "/actors/2",
+					"name": "/actors/1",
 					"event": [
 						{
 							"listen": "test",
@@ -570,13 +570,13 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/actors/2",
+							"raw": "{{host}}/actors/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"actors",
-								"2"
+								"1"
 							]
 						},
 						"description": "Delete actors from database"
@@ -589,7 +589,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJqbEZSakU1UmpVd01EaEJNa015TlVWQk5UbEVPRE5HUWpnMU1rSTVOekJHUlVKRE56VkZSUSJ9.eyJpc3MiOiJodHRwczovL2NvZmZlZS1zaG9wLWFwcGxpY2F0aW9uLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZWI2MjlhYjZiNjliYzBjMTIwNTlhZmUiLCJhdWQiOiJjYXBzdG9uZS1hcHAiLCJpYXQiOjE1ODk0MDkyOTksImV4cCI6MTU4OTQ5NTY5OSwiYXpwIjoicDFVN0JHNk1hSnhIT1NFSnpyZE53RnNWckM5Q1pqblIiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImRlbGV0ZTphY3RvcnMiLCJnZXQ6YWN0b3JzIiwiZ2V0Om1vdmllcyIsInBhdGNoOmFjdG9ycyIsInBhdGNoOm1vdmllcyIsInBvc3Q6YWN0b3JzIl19.noZS7kw8NbhKU_-l8VrdVqmR_erQjbLsJktNMjzMcUAC9l2iXGQytoC0Y6BfCqSA54mwHczxEwIDT3Ow-qrazY-QTpzaD7nmwmMPZHNmaSPYCuuwxtUfdPPHJm0kkElH0pQ7tEVogc21G4JRTofk0YiVglJdaxCUo8Ib8dKf8_QTFE0Sv_s_zFWyKb-o3rYSkhW0lVQrhJXgVj4r6zzWoyNknDUWuzzHcr2FZcGUyJF8bmulLCAYoSp41yUjDoAlv3U9iDB_UAhLULvtLCCXFeoj7ikX_4tv3Ucw1Nkt0BFDtiFBbQcJdSe7TMVEfFqsKmIYoAE3gI3GznbDLwl1Ag",
 						"type": "string"
 					}
 				]
@@ -949,7 +949,7 @@
 	],
 	"variable": [
 		{
-			"id": "7345d8ff-7365-48c6-a8f3-55b678d1a530",
+			"id": "e14b183d-2722-4f23-89b7-e99699ab1036",
 			"key": "host",
 			"value": "localhost:5000",
 			"type": "string"
