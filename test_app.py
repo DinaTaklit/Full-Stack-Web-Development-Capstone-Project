@@ -101,7 +101,11 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(len(data['actors']))  
-
+        
+    def test_401_get_actor_fail(self):
+        res = self.app.get('/actors', headers=setup_auth(''))
+        self.assertEqual(res.status_code, 401)
+               
     
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
