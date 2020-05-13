@@ -132,6 +132,41 @@ class CastingTestCase(unittest.TestCase):
         data = json.loads(res.data)  
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data['success'], False)
+        
+    # test path actors end points 
+    def test_patch_actor_casting_assistant(self):
+        res = self.client().patch('/actors/1', json={'age':25},
+                             headers=setup_auth('casting_assistant'))
+        self.assertEqual(res.status_code, 401)
+        
+        
+    def test_patch_actor_casting_director(self):
+        res = self.client().patch('/actors/1', json={'age':25},
+                             headers=setup_auth('casting_director'))
+        
+        data = json.loads(res.data)
+        actor = Actor.query.filter(Actor.id == 1).one_or_none() 
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.get_json()['success'], True)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(actor.getActor()['age'], 25)
+        
+    def test_patch_actor_executive_producer(self):
+        res = self.client().patch('/actors/1', json={'age':25},
+                             headers=setup_auth('executive_producer'))
+        
+        data = json.loads(res.data)
+        actor = Actor.query.filter(Actor.id == 1).one_or_none() 
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.get_json()['success'], True)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(actor.getActor()['age'], 25)
+        
+        
+
+     
     
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
