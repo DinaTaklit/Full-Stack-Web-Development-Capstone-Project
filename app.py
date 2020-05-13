@@ -6,6 +6,7 @@ from flask_cors import CORS
 from database.models import db_drop_and_create_all, setup_db, Movie, Actor
 from auth.auth import AuthError, requires_auth
 
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__)
@@ -19,13 +20,12 @@ def create_app(test_config=None):
     '''
     db_drop_and_create_all()
 
-
     @app.after_request
     def after_request(response):
         response.headers.add('Access-Control-Allow-Headers',
-                            'Content-Type, Authorization, true')
+                             'Content-Type, Authorization, true')
         response.headers.add('Access-Control-Allow-Methods',
-                            'GET, PATCH, POST, DELETE, OPTIONS')
+                             'GET, PATCH, POST, DELETE, OPTIONS')
         return response
 
     # ROUTES
@@ -44,7 +44,6 @@ def create_app(test_config=None):
             'message': 'hello world'
         })
 
-
     '''
     @Done implement endpoint
         GET /actors
@@ -54,9 +53,11 @@ def create_app(test_config=None):
             or appropriate status code indicating reason for failure
     '''
     @app.route('/actors')
-    def get_actors():
+    # require the 'get:actors' permission
+    @requires_auth(permission="get:actors")
+    def get_actors(payload):
         data = Actor.query.all()
-        actors= list(map(Actor.get_actor, data))
+        actors = list(map(Actor.get_actor, data))
         if actors is None or len(actors) == 0:
             abort(404)
         return jsonify({
@@ -73,9 +74,10 @@ def create_app(test_config=None):
             or appropriate status code indicating reason for failure
     '''
     @app.route('/movies')
-    def get_movies():
+    @requires_auth('get:movies')
+    def get_movies(payload):
         data = Movie.query.all()
-        movies= list(map(Movie.get_movie, data))
+        movies = list(map(Movie.get_movie, data))
         if movies is None or len(movies) == 0:
             abort(404)
         return jsonify({
@@ -128,7 +130,7 @@ def create_app(test_config=None):
     @app.route('/movies', methods=['POST'])
     def post_movie():
         body = request.get_json()
-        if 'title' not in body :
+        if 'title' not in body:
             abort(404)
         title = body.get('title', None)
         release_date = body.get('release_date', None)
@@ -138,7 +140,7 @@ def create_app(test_config=None):
             abort(400)
         try:
             new_movie = Movie(title=title, release_date=release_date)
-            print("\n new_movie after: \n",new_movie.get_movie())
+            print("\n new_movie after: \n", new_movie.get_movie())
             new_movie.insert()
             print("The movie was inserted")
             return jsonify({
@@ -147,7 +149,6 @@ def create_app(test_config=None):
             })
         except Exception as error:
             abort(422)
-
 
     '''
     @TODO implement endpoint
@@ -168,7 +169,7 @@ def create_app(test_config=None):
         body = request.get_json()  # get the body
         if body is None:
             abort(404)
-            
+
         updated_name = body.get('name', None)
         updated_age = body.get('age', None)
         updated_gender = body.get('gender', None)
@@ -176,10 +177,10 @@ def create_app(test_config=None):
         if updated_name is not None:
             actor.name = updated_name
         if updated_age is not None:
-            actor.age = updated_age     
+            actor.age = updated_age
         if updated_gender is not None:
             actor.gender = updated_gender
-  
+
         try:
             actor.update()  # update the record
             return jsonify({
@@ -188,7 +189,6 @@ def create_app(test_config=None):
             })
         except Exception as error:
             abort(422)
-
 
     '''
     @TODO implement endpoint
@@ -209,16 +209,15 @@ def create_app(test_config=None):
         body = request.get_json()  # get the body
         if body is None:
             abort(404)
-            
+
         updated_title = body.get('title', None)
         updated_release_date = body.get('release_date', None)
-
 
         if updated_title is not None:
             movie.title = updated_title
         if updated_release_date is not None:
-            movie.release_date = updated_release_date     
-  
+            movie.release_date = updated_release_date
+
         try:
             movie.update()  # update the record
             return jsonify({
@@ -254,7 +253,6 @@ def create_app(test_config=None):
         except Exception as error:
             abort(422)
 
-
     '''
     @TODO implement endpoint
         DELETE /movies/<id>
@@ -281,7 +279,6 @@ def create_app(test_config=None):
         except Exception as error:
             abort(422)
 
-
     # Error Handling
     '''
     @Done implement error handlers using the @app.errorhandler(error) decorator
@@ -305,7 +302,7 @@ def create_app(test_config=None):
             "error": 404,
             "message": "resource not found"
         }), 404
-        
+
     '''
     @Done implement error handler for 400
     '''
@@ -357,6 +354,7 @@ def create_app(test_config=None):
 
 APP = create_app()
 
+#APP.config.from_object('configmodule.DevelopmentConfig')
 if __name__ == '__main__':
-    #APP.run(host='0.0.0.0', port=8080, debug=True)
+    #APP.run(host='0.0.0.0', port=8080, debug=False)
     APP.run(debug=True)
