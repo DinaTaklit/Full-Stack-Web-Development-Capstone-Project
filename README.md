@@ -187,3 +187,48 @@ return jsonify({
         'movies': movies
     })
 ```
+
+### POST /actors
+
+- Require the `post:actors` permission
+- Create a new row in the actors table
+- Contain the actor.get_actor data representation
+returns status code 200 and json `{"success": True, "actors": actor}` where actor an array containing only the newly created actor or appropriate status code indicating reason for failure
+
+Here is a returned sample fromat
+
+```json
+{
+  "actors": [
+    {
+      "age": 24,
+      "gender": "Female",
+      "id": 1,
+      "name": "Actor 1"
+    }
+  ],
+  "success": true
+}
+```
+
+### POST /movies
+
+- Require the `post:movies` permission
+- Create a new row in the movies table
+- Contain the movie.get_movie data representation
+returns status code 200 and json `{"success": True, "movies": movie}` where movie an array containing only the newly created movie or appropriate status code indicating reason for failure.
+
+Here is a result sample format:
+
+```json
+{
+  "movies": [
+    {
+      "id": 1,
+      "release_date": "Thu, 14 May 2020 14:02:13 GMT",
+      "title": "Movie 1"
+    }
+  ],
+  "success": true
+}
+```
