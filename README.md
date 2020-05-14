@@ -281,3 +281,32 @@ Here is an example of the modified movie  in a format:
 }
 ```
 
+### DELETE /actors/<actor_id>
+
+- Require the `delete:actors` permission
+- Delete the corresponding row for `<actor_id>` where `<actor_id>` is the existing model id
+- Respond with a 404 error if `<actor_id>` is not found
+- Returns status code 200 and json `{"success": True, "deleted": actor_id}` where id is the id of the deleted record
+or appropriate status code indicating reason for failure
+
+```json
+return jsonify({
+    "success": True,
+    "deleted": actor_id
+})
+```
+
+### DELETE /movies/<movie_id>
+
+- Require the `delete:movies` permission
+- Delete the corresponding row for `<movie_id>` where `<movie_id>` is the existing model id
+- Respond with a 404 error if `<movie_id>` is not found
+- Returns status code 200 and json `{"success": True, "deleted": id}` where id is the id of the deleted record
+or appropriate status code indicating reason for failure
+
+```json
+return jsonify({
+    "success": True,
+    "deleted": movie_id
+})
+```
