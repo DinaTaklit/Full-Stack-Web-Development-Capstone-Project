@@ -43,7 +43,7 @@ class CastingTestCase(unittest.TestCase):
         self.app = create_app() 
         self.app.config['TESTING'] = True ## add it to fix Error 500
         self.app.config['WTF_CSRF_ENABLED'] = False
-        self.app.config['DEBUG'] = False
+        self.app.config['DEBUG'] = True
         self.client = self.app.test_client
         self.database_name = database_name
         self.database_path = database_path
@@ -55,15 +55,14 @@ class CastingTestCase(unittest.TestCase):
             "gender":"female"
         }
         self.new_movie = {
-            "title":"Test Movie"
+            "title":"The Tes Movie 1"
         }
         #binds the app to the current context 
         with self.app.app_context():
             self.db = SQLAlchemy()
             self.db.init_app(self.app)
-            self.db.drop_all()
             # create all tables
-            self.db.create_all() 
+            db_drop_and_create_all()
             
     #Define the tearDown method, which is implemented after each test. It will run as long as setUp executes successfully, regardless of test success.
     def tearDown(self):
@@ -84,7 +83,7 @@ class CastingTestCase(unittest.TestCase):
     #####           Actor Tests                #####
     ################################################
     
-    # test get actors end point
+    #test get actors end point
     def test_get_actors_casting_assistant(self):
         res = self.client().get('/actors', headers=setup_auth("casting_assistant"))
         data = json.loads(res.data)
@@ -116,14 +115,14 @@ class CastingTestCase(unittest.TestCase):
                             headers=setup_auth('casting_assistant'))
         self.assertEqual(res.status_code, 403)    
                
-    def test_post_actor_casting_director(self):
+    # def test_post_actor_casting_director(self):
         res = self.client().post('/actors', json=self.new_actor, headers=setup_auth('casting_director'))
         data = json.loads(res.data)    
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(len(data['actors']))
         
-    def test_post_actor_executive_producer(self):
+    # def test_post_actor_executive_producer(self):
         res = self.client().post('/actors', json=self.new_actor, headers=setup_auth('executive_producer'))
         data = json.loads(res.data)   
         self.assertEqual(res.status_code, 200)
@@ -200,9 +199,9 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 401)
   
       
-    ################################################
-    #####           Movie Tests                #####
-    ################################################
+    # ################################################
+    # #####           Movie Tests                #####
+    # ################################################
     # test get movies end point
     def test_get_movies_casting_assistant(self):
         res = self.client().get('/movies', headers=setup_auth("casting_assistant"))
@@ -259,10 +258,8 @@ class CastingTestCase(unittest.TestCase):
                              headers=setup_auth('casting_assistant'))
         self.assertEqual(res.status_code, 403)
         
-        
     def test_patch_movie_casting_director(self):
-        res = self.client().post('/movies', json=self.new_movie,
-                            headers=setup_auth('executive_producer'))
+        res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('executive_producer'))
         res = self.client().patch('/movies/1', json={'title':'updated_movie'},
                             headers=setup_auth('casting_director'))
         data = json.loads(res.data)
@@ -290,7 +287,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'resource not found')
     
-    # test delete movies end point   
+    # # test delete movies end point   
     def test_delete_movie_casting_assistant(self):
         res = self.client().delete('/movies/1', headers=setup_auth('casting_assistant'))
         self.assertEqual(res.status_code, 403)
@@ -300,6 +297,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 403)
   
     def test_delete_movie_executive_producer(self):
+        res = self.client().post('/movies', json=self.new_movie,headers=setup_auth('executive_producer'))
         res = self.client().delete('/movies/1', headers=setup_auth('executive_producer'))
         data = json.loads(res.data)   
         movie = Movie.query.filter(Movie.id == 1).one_or_none()      
