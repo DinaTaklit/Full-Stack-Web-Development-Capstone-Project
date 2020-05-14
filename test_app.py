@@ -145,7 +145,7 @@ class CastingTestCase(unittest.TestCase):
         
     def test_patch_actor_casting_director(self):
         res = self.client().post('/actors', json=self.new_actor,
-                             headers=setup_acluth('casting_director'))
+                             headers=setup_auth('casting_director'))
         res = self.client().patch('/actors/1', json={'age':25},
                              headers=setup_auth('casting_director'))
         data = json.loads(res.data)
@@ -261,9 +261,10 @@ class CastingTestCase(unittest.TestCase):
         
         
     def test_patch_movie_casting_director(self):
+        res = self.client().post('/movies', json=self.new_movie,
+                            headers=setup_auth('casting_director'))
         res = self.client().patch('/movies/1', json={'title':'updated_movie'},
-                             headers=setup_auth('casting_director'))
-        
+                            headers=setup_auth('casting_director'))
         data = json.loads(res.data)
         movie = Movie.query.filter(Movie.id == 1).one_or_none() 
         self.assertEqual(res.status_code, 200)
