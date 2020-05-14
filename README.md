@@ -232,3 +232,52 @@ Here is a result sample format:
   "success": true
 }
 ```
+
+
+### PATCH /actors/<actor_id>
+
+- Require the 'patch:actors' permission
+- Update an existing row in the actors table
+- Contain the actor.get_actor data representation
+returns status code 200 and json `{"success": True, "actors": actor}` where actor an array containing only the updated actor
+or appropriate status code indicating reason for failure
+
+He is a sample for a  modified actor in a format:
+
+```json
+{
+  "actors": [
+    {
+      "age": 25,
+      "gender": "female",
+      "id": 1,
+      "name": "Updated Actor 1"
+    }
+  ],
+  "success": true
+}
+```
+
+### PATCH /movies/<movie_id>
+
+- Require the `patch:movies` permission
+- Update an existing row in the movies table
+- Contain the movie.get_movie data representation
+returns status code 200 and json `{"success": True, "movies": movie}` where movie an array containing only the updated movie
+or appropriate status code indicating reason for failure
+
+Here is an example of the modified movie  in a format: 
+
+```json
+{
+  "movies": [
+    {
+      "id": 1,
+      "release_date": "Thu, 14 May 2020 14:02:13 GMT",
+      "title": "Updated Movie 1"
+    }
+  ],
+  "success": true
+}
+```
+
