@@ -143,3 +143,14 @@ The API will return four(04) error types when requests fail:
 - 422: Not Processable 
 - 401: AuthError Unauthorized error
 - 403: AuthError Permission not found
+  
+## Endpoints 
+
+- GET '/actors'
+- GET '/movies'
+- POST '/actors'
+- POST '/movies'
+- PATCH '/actors/{actor_id}'
+- PATCH '/movies/{movie_id}'
+- DELETE '/actors/{actor_id}' 
+- DELETE '/movies/{movie_id}'
