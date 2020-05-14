@@ -144,9 +144,10 @@ class CastingTestCase(unittest.TestCase):
         
         
     def test_patch_actor_casting_director(self):
+        res = self.client().post('/actors', json=self.new_actor,
+                             headers=setup_acluth('casting_director'))
         res = self.client().patch('/actors/1', json={'age':25},
                              headers=setup_auth('casting_director'))
-        
         data = json.loads(res.data)
         actor = Actor.query.filter(Actor.id == 1).one_or_none() 
         self.assertEqual(res.status_code, 200)
