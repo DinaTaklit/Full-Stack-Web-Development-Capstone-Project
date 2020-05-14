@@ -185,6 +185,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(actor,None)
         
     def test_delete_actor_executive_producer(self):
+        res = self.client().post('/actors', json=self.new_actor, headers=setup_auth('executive_producer'))
         res = self.client().delete('/actors/1', headers=setup_auth('executive_producer'))
         data = json.loads(res.data)   
         actor = Actor.query.filter(Actor.id == 1).one_or_none()      
