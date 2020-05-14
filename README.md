@@ -76,3 +76,40 @@ flask run --reload
 - The `--reload` flag will detect file changes and restart the server automatically.
 - Or you can directly run it with `python app.py` and everythin will be done automatically.
   
+
+## Setup Auth0
+
+1. Create a new Auth0 Account
+2. Select a unique tenant domain
+3. Create a new, single page web application
+4. Create a new API
+    - in API Settings:
+        - Enable RBAC
+        - Enable Add Permissions in the Access Token
+5. Create new API permissions:
+   - `get:movies`
+   - `get:actors`
+   - `post:movies`
+   - `post:actors`
+   - `patch:movies`
+   - `patch:actors`
+   - `delete:movies`
+   - `delete:actors`
+  
+6. Create new roles for:
+    - Casting Assistant 
+        - can  `get:movies get:actors`
+    - Casting director
+       - All permissions a Casting Assistant has and…
+       - Add or delete an actor from the database `post:actors delete:actors`
+       - Modify actors or movies `patch:actors delete:movies`
+    - Executive producer 
+       - Can perform all actions  
+
+7. Test your endpoints with [Postman](https://getpostman.com). 
+    - Register 3 users - assign the Casting Assistant role to the first one, Casting Director role to the second and Executive porducer to the last one.
+    - Sign into each account and make note of the JWT.
+    - Import the postman collection `./capstone-project.postman_collection.json`
+    - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
+    - Run the collection and correct any errors.
+    - Export the collection overwriting the included one to be able to run with your own jwt :).
