@@ -301,7 +301,7 @@ class CastingTestCase(unittest.TestCase):
         movie = Movie.query.filter(Movie.id == 1).one_or_none()      
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
-        self.assertEqual(data['deleted'], 1)
+        self.assertEqual(int(data['deleted']), 1)
         self.assertEqual(movie,None)
     
     def test_401_delete_movie_fail(self):
