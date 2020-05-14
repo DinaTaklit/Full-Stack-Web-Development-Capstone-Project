@@ -236,7 +236,7 @@ def create_app(test_config=None):
             it should respond with a 404 error if <id> is not found
             it should delete the corresponding row for <id>
             it should require the 'delete:actors' permission
-        returns status code 200 and json {"success": True, "delete": id}
+        returns status code 200 and json {"success": True, "deleted": id}
             where id is the id of the deleted record
             or appropriate status code indicating reason for failure
     '''
@@ -263,7 +263,7 @@ def create_app(test_config=None):
             it should respond with a 404 error if <id> is not found
             it should delete the corresponding row for <id>
             it should require the 'delete:movies' permission
-        returns status code 200 and json {"success": True, "delete": id}
+        returns status code 200 and json {"success": True, "deleted": id}
             where id is the id of the deleted record
             or appropriate status code indicating reason for failure
     '''
