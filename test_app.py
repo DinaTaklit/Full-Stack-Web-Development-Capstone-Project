@@ -289,7 +289,7 @@ class CastingTestCase(unittest.TestCase):
     # test delete movies end point   
     def test_delete_movie_casting_assistant(self):
         res = self.client().delete('/movies/1', headers=setup_auth('casting_assistant'))
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
 
     def test_delete_movie_casting_director(self):
         res = self.client().delete('/movies/1', headers=setup_auth('casting_director'))
