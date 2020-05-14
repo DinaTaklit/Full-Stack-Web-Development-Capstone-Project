@@ -270,10 +270,9 @@ class CastingTestCase(unittest.TestCase):
         
     def test_patch_movie_executive_producer(self):
         res = self.client().patch('/movies/1', json={'title':'updated_movie'},
-                             headers=setup_auth('executive_producer'))
-        
+                             headers=setup_auth('executive_producer'))     
         data = json.loads(res.data)
-        movie = movie.query.filter(movie.id == 1).one_or_none() 
+        movie = Movie.query.filter(Movie.id == 1).one_or_none() 
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(movie.get_movie()['title'], 'updated_movie')
