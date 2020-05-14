@@ -163,3 +163,27 @@ The API will return four(04) error types when requests fail:
 - PATCH '/movies/{movie_id}'
 - DELETE '/actors/{actor_id}'
 - DELETE '/movies/{movie_id}'
+
+### GET /actors
+
+- Require the 'get:actors' permission
+- Returns a list of actors
+
+```json
+return jsonify({
+        'success': True,
+        'actors': actors
+    })
+```
+
+### GET /movies
+
+- Require the 'get:movies' permission
+- Returns a list of movies
+  
+```json
+return jsonify({
+        'success': True,
+        'movies': movies
+    })
+```
