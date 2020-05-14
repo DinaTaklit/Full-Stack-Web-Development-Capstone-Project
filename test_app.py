@@ -41,7 +41,7 @@ class CastingTestCase(unittest.TestCase):
     def setUp(self):
         """Define test variables and initialize app."""
         self.app = create_app() 
-        self.app.config['TESTING'] = True ## add it to fix Error 500 
+        self.app.config['TESTING'] = True ## add it to fix Error 500
         self.app.config['WTF_CSRF_ENABLED'] = False
         self.app.config['DEBUG'] = False
         self.client = self.app.test_client
@@ -177,7 +177,7 @@ class CastingTestCase(unittest.TestCase):
     # test delete actors end point   
     def test_delete_actor_casting_assistant(self):
         res = self.client().delete('/actors/1', headers=setup_auth('casting_assistant'))
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
 
     def test_delete_actor_casting_director(self):
         res = self.client().delete('/actors/1', headers=setup_auth('casting_director'))
