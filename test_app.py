@@ -140,7 +140,7 @@ class CastingTestCase(unittest.TestCase):
     def test_patch_actor_casting_assistant(self):
         res = self.client().patch('/actors/1', json={'age':25},
                              headers=setup_auth('casting_assistant'))
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
         
         
     def test_patch_actor_casting_director(self):
