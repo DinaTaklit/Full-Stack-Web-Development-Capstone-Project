@@ -1,18 +1,23 @@
-# Casting Agency Capstone Project 
+# Casting Agency Capstone Project
 
 The Casting Agency models a company that is responsible for creating movies and managing and assigning actors to those movies. You are an Executive Producer within the company and are creating a system to simplify and streamline your process.
 
 ## Casting Agency Specifications
-### Models: 
+
+### Models
+
 - Movies with attributes title and release date
 - Actors with attributes name, age and gender
 
-### Endpoints:
+### Endpoints
+
 - GET /actors and /movies
 - DELETE /actors/ and /movies/
 - POST /actors and /movies and
 - PATCH /actors/ and /movies/
-### Roles:
+  
+### Roles
+
 - Casting Assistant
   - Can view actors and movies
 - Casting Director
@@ -23,7 +28,8 @@ The Casting Agency models a company that is responsible for creating movies and 
   - All permissions a Casting Director has and…
   - Add or delete a movie from the database
 
-### Tests:
+### Tests
+
 - One test for success behavior of each endpoint
 - One test for error behavior of each endpoint
 - At least two tests of RBAC for each role
@@ -31,6 +37,7 @@ The Casting Agency models a company that is responsible for creating movies and 
 ## Getting Started
 
 ### Installing Dependencies
+
 #### Python 3.7
 
 Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
@@ -76,7 +83,6 @@ flask run --reload
 - The `--reload` flag will detect file changes and restart the server automatically.
 - Or you can directly run it with `python app.py` and everythin will be done automatically.
   
-
 ## Setup Auth0
 
 1. Create a new Auth0 Account
@@ -97,16 +103,16 @@ flask run --reload
    - `delete:actors`
   
 6. Create new roles for:
-    - Casting Assistant 
+    - Casting Assistant
         - can  `get:movies get:actors`
     - Casting director
        - All permissions a Casting Assistant has and…
        - Add or delete an actor from the database `post:actors delete:actors`
        - Modify actors or movies `patch:actors delete:movies`
-    - Executive producer 
+    - Executive producer
        - Can perform all actions  
 
-7. Test your endpoints with [Postman](https://getpostman.com). 
+7. Test your endpoints with [Postman](https://getpostman.com).
     - Register 3 users - assign the Casting Assistant role to the first one, Casting Director role to the second and Executive porducer to the last one.
     - Sign into each account and make note of the JWT.
     - Import the postman collection `./capstone-project.postman_collection.json`
@@ -126,25 +132,28 @@ python test_app.py
 - **Base URL**: Base URL: Actually, this app can be run locally and it is hosted also as a base URL using heroku (the heroku URL is ). The backend app is hosted at the default, `http://127.0.0.1:5000/`, which is set as a proxy in the frontend configuration.
 - **Authentication**: This version of the application require authentication or API keys using Auth0 (Ps: The setup is givin in setup Auth0 section)
 
-## Error Handling 
+## Error Handling
 
 Errors are returned as JSON object in the following format:
-```
+
+```json
 {
-    "success": False, 
+    "success": False,
     "error": 400,
     "message": "bad request"
 }
 ```
+
 The API will return four(04) error types when requests fail:
-- 400: Bad Request 
+
+- 400: Bad Request
 - 404: Resource Not Found
 - 405: Method Not allowed
-- 422: Not Processable 
+- 422: Not Processable
 - 401: AuthError Unauthorized error
 - 403: AuthError Permission not found
   
-## Endpoints 
+## Endpoints
 
 - GET '/actors'
 - GET '/movies'
@@ -152,5 +161,5 @@ The API will return four(04) error types when requests fail:
 - POST '/movies'
 - PATCH '/actors/{actor_id}'
 - PATCH '/movies/{movie_id}'
-- DELETE '/actors/{actor_id}' 
+- DELETE '/actors/{actor_id}'
 - DELETE '/movies/{movie_id}'
