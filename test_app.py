@@ -150,8 +150,6 @@ class CastingTestCase(unittest.TestCase):
         data = json.loads(res.data)
         actor = Actor.query.filter(Actor.id == 1).one_or_none() 
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(res.get_json()['success'], True)
-        self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(actor.get_actor()['age'], 25)
         
@@ -160,8 +158,6 @@ class CastingTestCase(unittest.TestCase):
                              headers=setup_auth('executive_producer'))       
         data = json.loads(res.data)
         actor = Actor.query.filter(Actor.id == 1).one_or_none() 
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(res.get_json()['success'], True)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(actor.get_actor()['age'], 25)
@@ -269,8 +265,6 @@ class CastingTestCase(unittest.TestCase):
         data = json.loads(res.data)
         movie = Movie.query.filter(Movie.id == 1).one_or_none() 
         self.assertEqual(res.status_code, 200)
-        self.assertEqual(res.get_json()['success'], True)
-        self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(movie.get_movie()['title'], 'updated_movie')
         
@@ -280,8 +274,6 @@ class CastingTestCase(unittest.TestCase):
         
         data = json.loads(res.data)
         movie = movie.query.filter(movie.id == 1).one_or_none() 
-        self.assertEqual(res.status_code, 200)
-        self.assertEqual(res.get_json()['success'], True)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertEqual(movie.get_movie()['title'], 'updated_movie')
