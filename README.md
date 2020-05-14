@@ -166,7 +166,7 @@ The API will return four(04) error types when requests fail:
 
 ### GET /actors
 
-- Require the 'get:actors' permission
+- Require the `get:actors` permission
 - Returns a list of actors
 
 ```json
@@ -178,7 +178,7 @@ return jsonify({
 
 ### GET /movies
 
-- Require the 'get:movies' permission
+- Require the `get:movies` permission
 - Returns a list of movies
   
 ```json
