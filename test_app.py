@@ -293,7 +293,7 @@ class CastingTestCase(unittest.TestCase):
 
     def test_delete_movie_casting_director(self):
         res = self.client().delete('/movies/1', headers=setup_auth('casting_director'))
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
   
     def test_delete_movie_executive_producer(self):
         res = self.client().delete('/movies/1', headers=setup_auth('executive_producer'))
