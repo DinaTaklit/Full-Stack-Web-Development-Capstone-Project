@@ -113,3 +113,9 @@ flask run --reload
     - Right-clicking the collection folder for barista and manager, navigate to the authorization tab, and including the JWT in the token field (you should have noted these JWTs).
     - Run the collection and correct any errors.
     - Export the collection overwriting the included one to be able to run with your own jwt :).
+
+## Testing
+To run the tests, run
+```
+python test_app.py
+```
