@@ -41,6 +41,9 @@ class CastingTestCase(unittest.TestCase):
     def setUp(self):
         """Define test variables and initialize app."""
         self.app = create_app() 
+        self.app.config['TESTING'] = True ## add it to fix Error 500 
+        self.app.config['WTF_CSRF_ENABLED'] = False
+        self.app.config['DEBUG'] = False
         self.client = self.app.test_client
         self.database_name = database_name
         self.database_path = database_path
