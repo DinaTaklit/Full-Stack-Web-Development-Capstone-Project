@@ -238,7 +238,7 @@ class CastingTestCase(unittest.TestCase):
     def test_post_movie_casting_director(self):
         res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('casting_director'))
         data = json.loads(res.data)    
-        self.assertEqual(res.status_code, 401)
+        self.assertEqual(res.status_code, 403)
         
     def test_post_movie_executive_producer(self):
         res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('executive_producer'))
