@@ -7,16 +7,16 @@ from database.models import db, db_drop_and_create_all, setup_db, Movie, Actor
 from auth.auth import AuthError, requires_auth
 from sqlalchemy import Column, String, Integer, DateTime
 import logging
-from configparser import ConfigParser
-
+from setup import CASTING_ASSISTANT_JWT, CASTING_DIRECTOR_JWT, EXECUTIVE_PRODUCER_JWT
 # define the global vars 
 database_name = "capstone_test.db"
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_path = "sqlite:///{}".format(os.path.join(project_dir, database_name))
 
-casting_assistant_token = os.getenv('CASTING_ASSISTANT_JWT')
-casting_director_token = os.getenv('CASTING_DIRECTOR_JWT')
-executive_producer_token = os.getenv('EXECUTIVE_PRODUCER_JWT')
+
+casting_assistant_token = CASTING_ASSISTANT_JWT
+casting_director_token = CASTING_DIRECTOR_JWT
+executive_producer_token = EXECUTIVE_PRODUCER_JWT
 
 # define set authetification method 
 def setup_auth(role):
@@ -40,7 +40,7 @@ class CastingTestCase(unittest.TestCase):
     #Define and implement the setUp function. It will be executed before each test and is where you should initialize the app and test client, as well as any other context your tests will need. The Flask library provides a test client for the application, accessed as shown below.
     def setUp(self):
         """Define test variables and initialize app."""
-        self.app = create_app()      
+        self.app = create_app() 
         self.client = self.app.test_client
         self.database_name = database_name
         self.database_path = database_path
@@ -154,8 +154,7 @@ class CastingTestCase(unittest.TestCase):
         
     def test_patch_actor_executive_producer(self):
         res = self.client().patch('/actors/1', json={'age':25},
-                             headers=setup_auth('executive_producer'))
-        
+                             headers=setup_auth('executive_producer'))       
         data = json.loads(res.data)
         actor = Actor.query.filter(Actor.id == 1).one_or_none() 
         self.assertEqual(res.status_code, 200)
@@ -165,7 +164,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(actor.get_actor()['age'], 25)
     
     def test_404_patch_actor_fail(self):
-        res = self.client().patch('/actors/100000', json={},
+        res = self.client().patch('/actors/100', json={},
                              headers=setup_auth('executive_producer'))
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
