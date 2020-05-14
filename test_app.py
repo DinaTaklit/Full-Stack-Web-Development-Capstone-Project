@@ -262,7 +262,7 @@ class CastingTestCase(unittest.TestCase):
         
     def test_patch_movie_casting_director(self):
         res = self.client().post('/movies', json=self.new_movie,
-                            headers=setup_auth('casting_director'))
+                            headers=setup_auth('executive_producer'))
         res = self.client().patch('/movies/1', json={'title':'updated_movie'},
                             headers=setup_auth('casting_director'))
         data = json.loads(res.data)
