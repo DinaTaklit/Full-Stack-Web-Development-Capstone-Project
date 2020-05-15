@@ -65,9 +65,6 @@ class CastingTestCase(unittest.TestCase):
         self.new_movie2 = {
             "title":"The Tes Movie 2"
         }
-        self.new_movie3 = {
-            "title":"The Tes Movie 3"
-        }
         #binds the app to the current context 
         with self.app.app_context():
             self.db = SQLAlchemy()
@@ -97,7 +94,7 @@ class CastingTestCase(unittest.TestCase):
     #####           Actor Tests                #####
     ################################################
     
-    #test get actors end point
+    # test get actors end point
     def test_get_actors_casting_assistant(self):
         res = self.client().get('/actors', headers=setup_auth("casting_assistant"))
         data = json.loads(res.data)
@@ -123,7 +120,7 @@ class CastingTestCase(unittest.TestCase):
         res = self.client().get('/actors', headers=setup_auth(''))
         self.assertEqual(res.status_code, 401)
     
-    #test post actors end point     
+    # test post actors end point     
     def test_post_actor_casting_assistant(self):
         res = self.client().post('/actors', json=self.new_actor2,
                             headers=setup_auth('casting_assistant'))
@@ -149,7 +146,7 @@ class CastingTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data['success'], False)
         
-    #test patch actors end point 
+    # test patch actors end point 
     def test_patch_actor_casting_assistant(self):
         res = self.client().patch('/actors/1', json={'age':25},
                              headers=setup_auth('casting_assistant'))
@@ -217,112 +214,108 @@ class CastingTestCase(unittest.TestCase):
     # #####           Movie Tests                #####
     # ################################################
     # test get movies end point
-    # def test_get_movies_casting_assistant(self):
-    #     res = self.client().get('/movies', headers=setup_auth("casting_assistant"))
-    #     data = json.loads(res.data)
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertTrue(len(data['movies']))
+    def test_get_movies_casting_assistant(self):
+        res = self.client().get('/movies', headers=setup_auth("casting_assistant"))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['movies']))
         
-    # def test_get_movies_casting_director(self):
-    #     res = self.client().get('/movies', headers=setup_auth("casting_director"))
-    #     data = json.loads(res.data)
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertTrue(len(data['movies']))  
+    def test_get_movies_casting_director(self):
+        res = self.client().get('/movies', headers=setup_auth("casting_director"))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['movies']))  
     
-    # def test_get_movies_executive_producer(self):
-    #     res = self.client().get('/movies', headers=setup_auth("executive_producer"))
-    #     data = json.loads(res.data)
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertTrue(len(data['movies']))  
+    def test_get_movies_executive_producer(self):
+        res = self.client().get('/movies', headers=setup_auth("executive_producer"))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['movies']))  
              
-    # def test_401_get_movie_fail(self):
-    #     res = self.client().get('/movies', headers=setup_auth(''))
-    #     self.assertEqual(res.status_code, 401)
+    def test_401_get_movie_fail(self):
+        res = self.client().get('/movies', headers=setup_auth(''))
+        self.assertEqual(res.status_code, 401)
     
-    # # test post movies end point      
-    # def test_post_movie_casting_assistant(self):
-    #     res = self.client().post('/movies', json=self.new_movie,
-    #                         headers=setup_auth('casting_assistant'))
-    #     self.assertEqual(res.status_code, 403)    
+    # test post movies end point      
+    def test_post_movie_casting_assistant(self):
+        res = self.client().post('/movies', json=self.new_movie2,
+                            headers=setup_auth('casting_assistant'))
+        self.assertEqual(res.status_code, 403)    
                
-    # def test_post_movie_casting_director(self):
-    #     res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('casting_director'))
-    #     data = json.loads(res.data)    
-    #     self.assertEqual(res.status_code, 403)
+    def test_post_movie_casting_director(self):
+        res = self.client().post('/movies', json=self.new_movie2, headers=setup_auth('casting_director'))
+        data = json.loads(res.data)    
+        self.assertEqual(res.status_code, 403)
         
-    # def test_post_movie_executive_producer(self):
-    #     res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('executive_producer'))
-    #     data = json.loads(res.data)   
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertTrue(len(data['movies']))
+    def test_post_movie_executive_producer(self):
+        res = self.client().post('/movies', json=self.new_movie2, headers=setup_auth('executive_producer'))
+        data = json.loads(res.data)   
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertTrue(len(data['movies']))
         
-    # def test_422_post_movies_fail(self):
-    #     res = self.client().post('/actors', json={}, headers=setup_auth('casting_director'))
-    #     data = json.loads(res.data)  
-    #     self.assertEqual(res.status_code, 422)
-    #     self.assertEqual(data['success'], False)  
+    def test_422_post_movies_fail(self):
+        res = self.client().post('/actors', json={}, headers=setup_auth('casting_director'))
+        data = json.loads(res.data)  
+        self.assertEqual(res.status_code, 422)
+        self.assertEqual(data['success'], False)  
 
-    # # test patch movies end points 
-    # def test_patch_movie_casting_assistant(self):
-    #     res = self.client().patch('/movies/1', json={'title':'updated_movie'},
-    #                          headers=setup_auth('casting_assistant'))
-    #     self.assertEqual(res.status_code, 403)
+    # test patch movies end points 
+    def test_patch_movie_casting_assistant(self):
+        res = self.client().patch('/movies/1', json={'title':'updated_movie'},
+                             headers=setup_auth('casting_assistant'))
+        self.assertEqual(res.status_code, 403)
         
-    # def test_patch_movie_casting_director(self):
-    #     res = self.client().post('/movies', json=self.new_movie, headers=setup_auth('executive_producer'))
-    #     res = self.client().patch('/movies/1', json={'title':'updated_movie'},
-    #                         headers=setup_auth('casting_director'))
-    #     data = json.loads(res.data)
-    #     movie = Movie.query.filter(Movie.id == 1).one_or_none() 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertEqual(movie.get_movie()['title'], 'updated_movie')
+    def test_patch_movie_casting_director(self):
+        res = self.client().patch('/movies/1', json={'title':'updated_movie1'},
+                            headers=setup_auth('casting_director'))
+        data = json.loads(res.data)
+        movie = Movie.query.filter(Movie.id == 1).one_or_none() 
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(movie.get_movie()['title'], 'updated_movie1')
         
-    # def test_patch_movie_executive_producer(self):
-    #     res = self.client().post('/movies', json=self.new_movie,
-    #                         headers=setup_auth('executive_producer'))
-    #     res = self.client().patch('/movies/1', json={'title':'updated_movie'},
-    #                          headers=setup_auth('executive_producer'))     
-    #     data = json.loads(res.data)
-    #     movie = Movie.query.filter(Movie.id == 1).one_or_none() 
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertEqual(movie.get_movie()['title'], 'updated_movie')
+    def test_patch_movie_executive_producer(self):
+        res = self.client().patch('/movies/1', json={'title':'updated_movie2'},
+                             headers=setup_auth('executive_producer'))     
+        data = json.loads(res.data)
+        movie = Movie.query.filter(Movie.id == 1).one_or_none() 
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(movie.get_movie()['title'], 'updated_movie2')
     
-    # def test_404_patch_movie_fail(self):
-    #     res = self.client().patch('/movies/100000', json={},
-    #                          headers=setup_auth('executive_producer'))
-    #     data = json.loads(res.data)
-    #     self.assertEqual(res.status_code, 404)
-    #     self.assertEqual(data['success'], False)
-    #     self.assertEqual(data['message'], 'resource not found')
+    def test_404_patch_movie_fail(self):
+        res = self.client().patch('/movies/500', json={},
+                             headers=setup_auth('executive_producer'))
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 404)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'resource not found')
     
-    # # # test delete movies end point   
-    # def test_delete_movie_casting_assistant(self):
-    #     res = self.client().delete('/movies/1', headers=setup_auth('casting_assistant'))
-    #     self.assertEqual(res.status_code, 403)
+    # test delete movies end point   
+    def test_delete_movie_casting_assistant(self):
+        res = self.client().delete('/movies/1', headers=setup_auth('casting_assistant'))
+        self.assertEqual(res.status_code, 403)
 
-    # def test_delete_movie_casting_director(self):
-    #     res = self.client().delete('/movies/1', headers=setup_auth('casting_director'))
-    #     self.assertEqual(res.status_code, 403)
+    def test_delete_movie_casting_director(self):
+        res = self.client().delete('/movies/1', headers=setup_auth('casting_director'))
+        self.assertEqual(res.status_code, 403)
   
-    # def test_delete_movie_executive_producer(self):
-    #     res = self.client().post('/movies', json=self.new_movie,headers=setup_auth('executive_producer'))
-    #     res = self.client().delete('/movies/1', headers=setup_auth('executive_producer'))
-    #     data = json.loads(res.data)   
-    #     movie = Movie.query.filter(Movie.id == 1).one_or_none()      
-    #     self.assertEqual(res.status_code, 200)
-    #     self.assertEqual(data['success'], True)
-    #     self.assertEqual(int(data['deleted']), 1)
-    #     self.assertEqual(movie,None)
+    def test_delete_movie_executive_producer(self):
+        res = self.client().delete('/movies/1', headers=setup_auth('executive_producer'))
+        data = json.loads(res.data)   
+        movie = Movie.query.filter(Movie.id == 1).one_or_none()      
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(data['success'], True)
+        self.assertEqual(int(data['deleted']), 1)
+        self.assertEqual(movie,None)
     
-    # def test_401_delete_movie_fail(self):
-    #     res = self.client().delete('/movies/1', headers=setup_auth(''))
-    #     self.assertEqual(res.status_code, 401)
+    def test_401_delete_movie_fail(self):
+        res = self.client().delete('/movies/1', headers=setup_auth(''))
+        self.assertEqual(res.status_code, 401)
 
 #Run the test suite, by running python test_file_name.py from the command line.
 if __name__ == "__main__":
