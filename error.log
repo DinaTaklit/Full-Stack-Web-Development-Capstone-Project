@@ -1,7 +1,174 @@
-2020-05-12 05:15:18,234 WARNING:  * Debugger is active!
-2020-05-12 05:15:18,243 INFO:  * Debugger PIN: 262-101-061
-2020-05-12 05:15:18,267 INFO:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
-2020-05-12 05:15:19,389 INFO:  * Detected change in 'C:\\Users\\user\\Desktop\\Dev\\FullStack\\capstone\\auth\\auth.py', reloading
-2020-05-12 05:15:21,086 WARNING:  * Debugger is active!
-2020-05-12 05:15:21,097 INFO:  * Debugger PIN: 262-101-061
-2020-05-12 05:15:21,120 INFO:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2020-05-14 22:59:39,297 INFO: Authorization header is missing
+2020-05-14 22:59:42,734 INFO: unauthorized, Permission not found.
+2020-05-14 22:59:45,645 INFO: unauthorized, Permission not found.
+2020-05-14 23:01:46,821 INFO: Authorization header is missing
+2020-05-14 23:01:47,029 INFO: Authorization header is missing
+2020-05-14 23:01:47,229 INFO: Authorization header is missing
+2020-05-14 23:01:47,424 INFO: Authorization header is missing
+2020-05-14 23:01:57,023 INFO: unauthorized, Permission not found.
+2020-05-14 23:02:02,962 INFO: unauthorized, Permission not found.
+2020-05-14 23:02:04,462 INFO: unauthorized, Permission not found.
+2020-05-14 23:02:17,400 INFO: unauthorized, Permission not found.
+2020-05-14 23:02:26,480 INFO: unauthorized, Permission not found.
+2020-05-14 23:02:34,295 INFO: unauthorized, Permission not found.
+2020-05-14 23:02:38,291 INFO: unauthorized, Permission not found.
+2020-05-14 23:02:39,725 INFO: unauthorized, Permission not found.
+2020-05-14 23:15:00,190 INFO: Authorization header is missing
+2020-05-14 23:15:03,846 INFO: Authorization header is missing
+2020-05-14 23:15:45,235 INFO: unauthorized, Permission not found.
+2020-05-14 23:16:16,773 INFO: unauthorized, Permission not found.
+2020-05-14 23:16:41,752 INFO: unauthorized, Permission not found.
+2020-05-14 23:21:20,184 INFO: Authorization header is missing
+2020-05-14 23:21:23,936 INFO: Authorization header is missing
+2020-05-14 23:21:38,864 INFO: unauthorized, Permission not found.
+2020-05-14 23:22:07,747 INFO: unauthorized, Permission not found.
+2020-05-14 23:22:29,912 INFO: unauthorized, Permission not found.
+2020-05-14 23:24:21,998 INFO: Authorization header is missing
+2020-05-14 23:24:36,022 INFO: unauthorized, Permission not found.
+2020-05-14 23:24:51,630 INFO: unauthorized, Permission not found.
+2020-05-14 23:25:09,451 INFO: unauthorized, Permission not found.
+2020-05-14 23:27:05,746 INFO: Authorization header is missing
+2020-05-14 23:27:19,391 INFO: unauthorized, Permission not found.
+2020-05-14 23:27:36,734 INFO: unauthorized, Permission not found.
+2020-05-14 23:27:51,446 INFO: unauthorized, Permission not found.
+2020-05-14 23:29:42,295 INFO: Authorization header is missing
+2020-05-14 23:29:54,939 INFO: unauthorized, Permission not found.
+2020-05-14 23:30:09,276 INFO: unauthorized, Permission not found.
+2020-05-14 23:30:24,018 INFO: unauthorized, Permission not found.
+2020-05-14 23:31:59,151 INFO: Token expired
+2020-05-14 23:32:00,362 INFO: Token expired
+2020-05-14 23:32:00,365 INFO: Authorization header is missing
+2020-05-14 23:32:01,813 INFO: Token expired
+2020-05-14 23:32:02,934 INFO: Token expired
+2020-05-14 23:32:04,164 INFO: Token expired
+2020-05-14 23:32:05,909 INFO: Token expired
+2020-05-14 23:32:07,444 INFO: Token expired
+2020-05-14 23:32:10,148 INFO: Token expired
+2020-05-14 23:32:11,335 INFO: Token expired
+2020-05-14 23:32:12,560 INFO: unauthorized, Permission not found.
+2020-05-14 23:32:13,983 INFO: Token expired
+2020-05-14 23:32:15,325 INFO: Token expired
+2020-05-14 23:32:18,093 INFO: Token expired
+2020-05-14 23:32:19,319 INFO: Token expired
+2020-05-14 23:32:20,552 INFO: Token expired
+2020-05-14 23:32:21,777 INFO: Token expired
+2020-05-14 23:32:23,321 INFO: Token expired
+2020-05-14 23:32:24,643 INFO: Token expired
+2020-05-14 23:32:26,085 INFO: unauthorized, Permission not found.
+2020-05-14 23:32:27,616 INFO: Token expired
+2020-05-14 23:32:28,851 INFO: Token expired
+2020-05-14 23:32:31,409 INFO: Token expired
+2020-05-14 23:32:32,642 INFO: Token expired
+2020-05-14 23:32:33,871 INFO: Token expired
+2020-05-14 23:32:35,497 INFO: Token expired
+2020-05-14 23:32:36,736 INFO: Token expired
+2020-05-14 23:32:38,040 INFO: unauthorized, Permission not found.
+2020-05-14 23:32:40,498 INFO: Token expired
+2020-05-14 23:33:37,142 INFO: Token expired
+2020-05-14 23:33:38,370 INFO: Token expired
+2020-05-14 23:33:39,601 INFO: Token expired
+2020-05-14 23:33:40,916 INFO: Token expired
+2020-05-14 23:33:42,058 INFO: Token expired
+2020-05-14 23:33:44,929 INFO: Token expired
+2020-05-14 23:33:46,259 INFO: Token expired
+2020-05-14 23:33:47,328 INFO: unauthorized, Permission not found.
+2020-05-14 23:33:48,713 INFO: Token expired
+2020-05-14 23:33:50,254 INFO: Token expired
+2020-05-14 23:33:52,883 INFO: Token expired
+2020-05-14 23:33:54,042 INFO: Token expired
+2020-05-14 23:33:55,268 INFO: Token expired
+2020-05-14 23:33:56,805 INFO: Token expired
+2020-05-14 23:33:57,985 INFO: Token expired
+2020-05-14 23:33:59,165 INFO: unauthorized, Permission not found.
+2020-05-14 23:34:02,825 INFO: Token expired
+2020-05-14 23:35:10,633 INFO: Token expired
+2020-05-14 23:35:11,760 INFO: Token expired
+2020-05-14 23:35:13,705 INFO: Token expired
+2020-05-14 23:35:15,138 INFO: Token expired
+2020-05-14 23:35:16,251 INFO: Token expired
+2020-05-14 23:35:17,350 INFO: unauthorized, Permission not found.
+2020-05-14 23:35:18,825 INFO: Token expired
+2020-05-14 23:35:21,692 INFO: Token expired
+2020-05-14 23:35:23,009 INFO: Token expired
+2020-05-14 23:35:24,338 INFO: Token expired
+2020-05-14 23:35:25,484 INFO: Token expired
+2020-05-14 23:35:26,709 INFO: unauthorized, Permission not found.
+2020-05-14 23:35:27,900 INFO: Token expired
+2020-05-14 23:36:06,702 INFO:  * Restarting with stat
+2020-05-14 23:36:08,074 WARNING:  * Debugger is active!
+2020-05-14 23:36:08,084 INFO:  * Debugger PIN: 262-101-061
+2020-05-14 23:36:08,117 INFO:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2020-05-14 23:36:15,156 INFO: Token expired
+2020-05-14 23:36:15,160 INFO: 127.0.0.1 - - [14/May/2020 23:36:15] "[31m[1mPOST /movies HTTP/1.1[0m" 401 -
+2020-05-14 23:38:25,540 INFO: 127.0.0.1 - - [14/May/2020 23:38:25] "[37mGET / HTTP/1.1[0m" 200 -
+2020-05-14 23:38:26,440 INFO: 127.0.0.1 - - [14/May/2020 23:38:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2020-05-14 23:40:19,813 INFO: 127.0.0.1 - - [14/May/2020 23:40:19] "[37mGET / HTTP/1.1[0m" 200 -
+2020-05-14 23:40:20,107 INFO: 127.0.0.1 - - [14/May/2020 23:40:20] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2020-05-14 23:41:09,271 INFO: 127.0.0.1 - - [14/May/2020 23:41:09] "[37mGET / HTTP/1.1[0m" 200 -
+2020-05-14 23:41:09,513 INFO: 127.0.0.1 - - [14/May/2020 23:41:09] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2020-05-14 23:41:12,296 INFO: 127.0.0.1 - - [14/May/2020 23:41:12] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2020-05-14 23:41:27,541 INFO: 127.0.0.1 - - [14/May/2020 23:41:27] "[37mGET / HTTP/1.1[0m" 200 -
+2020-05-14 23:41:27,792 INFO: 127.0.0.1 - - [14/May/2020 23:41:27] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2020-05-14 23:43:12,420 INFO: unauthorized, Permission not found.
+2020-05-14 23:43:21,081 INFO: unauthorized, Permission not found.
+2020-05-14 23:44:30,286 INFO:  * Restarting with stat
+2020-05-14 23:44:31,668 WARNING:  * Debugger is active!
+2020-05-14 23:44:31,674 INFO:  * Debugger PIN: 262-101-061
+2020-05-14 23:44:31,687 INFO:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2020-05-14 23:44:35,041 INFO: 127.0.0.1 - - [14/May/2020 23:44:35] "[31m[1mPOST /movies HTTP/1.1[0m" 401 -
+2020-05-14 23:45:29,108 INFO: 127.0.0.1 - - [14/May/2020 23:45:29] "[37mPOST /movies HTTP/1.1[0m" 200 -
+2020-05-14 23:46:40,291 INFO: unauthorized, Permission not found.
+2020-05-14 23:47:44,085 INFO: unauthorized, Permission not found.
+2020-05-15 00:28:54,024 INFO: unauthorized, Permission not found.
+2020-05-15 00:31:30,273 INFO: unauthorized, Permission not found.
+2020-05-15 00:35:07,281 INFO: unauthorized, Permission not found.
+2020-05-15 00:50:48,981 INFO: unauthorized, Permission not found.
+2020-05-15 00:56:18,385 INFO: unauthorized, Permission not found.
+2020-05-15 00:57:38,423 INFO: unauthorized, Permission not found.
+2020-05-15 00:58:18,416 INFO: Authorization header is missing
+2020-05-15 00:58:56,570 INFO: Authorization header is missing
+2020-05-15 01:00:43,456 INFO: Authorization header is missing
+2020-05-15 01:00:46,436 INFO: Authorization header is missing
+2020-05-15 01:00:59,369 INFO: unauthorized, Permission not found.
+2020-05-15 01:01:37,934 INFO: unauthorized, Permission not found.
+2020-05-15 01:02:00,089 INFO: unauthorized, Permission not found.
+2020-05-15 01:38:59,392 INFO: Authorization header is missing
+2020-05-15 01:40:01,037 INFO: unauthorized, Permission not found.
+2020-05-15 01:40:50,989 INFO: unauthorized, Permission not found.
+2020-05-15 01:42:55,787 INFO: unauthorized, Permission not found.
+2020-05-15 01:46:49,063 INFO:  * Restarting with stat
+2020-05-15 01:46:50,232 WARNING:  * Debugger is active!
+2020-05-15 01:46:50,240 INFO:  * Debugger PIN: 262-101-061
+2020-05-15 01:46:50,260 INFO:  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+2020-05-15 01:47:00,421 INFO: unauthorized, Permission not found.
+2020-05-15 01:47:23,792 INFO: unauthorized, Permission not found.
+2020-05-15 01:48:24,478 INFO: Authorization header is missing
+2020-05-15 01:49:26,411 INFO: Authorization header is missing
+2020-05-15 01:49:29,822 INFO: Authorization header is missing
+2020-05-15 01:49:48,588 INFO: unauthorized, Permission not found.
+2020-05-15 01:49:55,241 INFO: unauthorized, Permission not found.
+2020-05-15 01:50:20,430 INFO: unauthorized, Permission not found.
+2020-05-15 01:50:33,548 INFO: unauthorized, Permission not found.
+2020-05-15 01:50:37,429 INFO: unauthorized, Permission not found.
+2020-05-15 01:52:20,628 INFO: Authorization header is missing
+2020-05-15 01:52:24,814 INFO: Authorization header is missing
+2020-05-15 01:52:32,988 INFO: Authorization header is missing
+2020-05-15 01:52:43,373 INFO: Authorization header is missing
+2020-05-15 01:53:09,902 INFO: unauthorized, Permission not found.
+2020-05-15 01:53:26,388 INFO: unauthorized, Permission not found.
+2020-05-15 01:53:30,588 INFO: unauthorized, Permission not found.
+2020-05-15 01:54:02,842 INFO: unauthorized, Permission not found.
+2020-05-15 01:54:21,840 INFO: unauthorized, Permission not found.
+2020-05-15 01:54:35,405 INFO: unauthorized, Permission not found.
+2020-05-15 01:55:39,890 INFO: Authorization header is missing
+2020-05-15 01:55:43,472 INFO: Authorization header is missing
+2020-05-15 01:55:48,307 INFO: Authorization header is missing
+2020-05-15 01:55:51,346 INFO: Authorization header is missing
+2020-05-15 01:56:15,551 INFO: unauthorized, Permission not found.
+2020-05-15 01:56:31,489 INFO: unauthorized, Permission not found.
+2020-05-15 01:56:39,108 INFO: unauthorized, Permission not found.
+2020-05-15 01:57:12,383 INFO: unauthorized, Permission not found.
+2020-05-15 01:57:27,537 INFO: unauthorized, Permission not found.
+2020-05-15 01:57:40,952 INFO: unauthorized, Permission not found.
+2020-05-15 01:57:57,745 INFO: unauthorized, Permission not found.
+2020-05-15 01:58:02,662 INFO: unauthorized, Permission not found.
