@@ -172,3 +172,4 @@
 2020-05-15 01:57:40,952 INFO: unauthorized, Permission not found.
 2020-05-15 01:57:57,745 INFO: unauthorized, Permission not found.
 2020-05-15 01:58:02,662 INFO: unauthorized, Permission not found.
+2020-05-15 20:38:26,207 ERROR: Error: Directory migrations already exists and is not empty
