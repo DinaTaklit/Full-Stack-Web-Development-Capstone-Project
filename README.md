@@ -169,7 +169,7 @@ Check those questions on stack overflow links for more details
 To run the tests, run
 
 ```
-python test_app.py
+python3 test_app.py
 ```
 ## Deploy the application on heroku
 
