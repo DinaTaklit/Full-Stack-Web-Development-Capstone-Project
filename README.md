@@ -38,7 +38,7 @@ The Casting Agency models a company that is responsible for creating movies and 
 
 ### Installing Dependencies
 
-#### Python 3.7
+#### Python 3.7+
 
 Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
 
@@ -46,12 +46,17 @@ Follow instructions to install the latest version of python for your platform in
 
 We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
+> By using anaconda you can create your envirement by running `conda create -n name_of_your_env`
+> - Then activate it by running `conda activate name_of_your_env`
+> - Install all your dependencies on this env :).
+> - To deactivate the env run `conda deactivate`
+
 #### PIP Dependencies
 
 Once you have your virtual environment setup and running, install dependencies by naviging to the `/backend` directory and running:
 
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 This will install all of the required packages we selected within the `requirements.txt` file.
@@ -72,6 +77,12 @@ Each time you open a new terminal session, run:
 
 ```bash
 export FLASK_APP=app.py;
+```
+
+On windows you should run this command instead:
+
+```bash
+set FLASK_APP=app.py;
 ```
 
 To run the server, execute:
