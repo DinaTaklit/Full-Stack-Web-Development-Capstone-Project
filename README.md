@@ -240,14 +240,14 @@ To depoloy your application follow this document => [Deploy an application on He
 
 And that is it all. Congratulation :D. Now we have a live app :D. Open it from the heroku dashboard and see it live :D. Make additional requests using curl or Postman as you build your application and make more complex endpoints :).
 
-# API Reference 
+## API Reference
 
-## Getting Started 
+### Getting Started
 
 - **Base URL**: Base URL: Actually, this app can be run locally and it is hosted also as a base URL using heroku (the deplyed application URL is : https://capstone-casting-agency-app.herokuapp.com/). The backend app is hosted at the default, `http://127.0.0.1:5000/`, which is set as a proxy in the frontend configuration.
 - **Authentication**: This version of the application require authentication or API keys using Auth0 (Ps: The setup is givin in setup Auth0 section)
 
-## Error Handling
+### Error Handling
 
 Errors are returned as JSON object in the following format:
 
@@ -268,7 +268,7 @@ The API will return four(04) error types when requests fail:
 - 401: AuthError Unauthorized error
 - 403: AuthError Permission not found
   
-## Endpoints
+### Endpoints
 
 - GET '/actors'
 - GET '/movies'
@@ -279,7 +279,7 @@ The API will return four(04) error types when requests fail:
 - DELETE '/actors/{actor_id}'
 - DELETE '/movies/{movie_id}'
 
-### GET /actors
+#### GET /actors
 
 - Require the `get:actors` permission
 - Returns a list of actors
@@ -291,7 +291,7 @@ return jsonify({
     })
 ```
 
-### GET /movies
+#### GET /movies
 
 - Require the `get:movies` permission
 - Returns a list of movies
@@ -303,7 +303,7 @@ return jsonify({
     })
 ```
 
-### POST /actors
+#### POST /actors
 
 - Require the `post:actors` permission
 - Create a new row in the actors table
@@ -326,7 +326,7 @@ Here is a returned sample fromat
 }
 ```
 
-### POST /movies
+#### POST /movies
 
 - Require the `post:movies` permission
 - Create a new row in the movies table
@@ -348,8 +348,7 @@ Here is a result sample format:
 }
 ```
 
-
-### PATCH /actors/<actor_id>
+#### PATCH /actors/<actor_id>
 
 - Require the 'patch:actors' permission
 - Update an existing row in the actors table
@@ -373,7 +372,7 @@ He is a sample for a  modified actor in a format:
 }
 ```
 
-### PATCH /movies/<movie_id>
+#### PATCH /movies/<movie_id>
 
 - Require the `patch:movies` permission
 - Update an existing row in the movies table
@@ -396,7 +395,7 @@ Here is an example of the modified movie  in a format:
 }
 ```
 
-### DELETE /actors/<actor_id>
+#### DELETE /actors/<actor_id>
 
 - Require the `delete:actors` permission
 - Delete the corresponding row for `<actor_id>` where `<actor_id>` is the existing model id
@@ -411,7 +410,7 @@ return jsonify({
 })
 ```
 
-### DELETE /movies/<movie_id>
+#### DELETE /movies/<movie_id>
 
 - Require the `delete:movies` permission
 - Delete the corresponding row for `<movie_id>` where `<movie_id>` is the existing model id
