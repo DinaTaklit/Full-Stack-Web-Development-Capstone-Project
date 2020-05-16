@@ -160,6 +160,85 @@ To run the tests, run
 ```
 python test_app.py
 ```
+## Deploy the application on heroku
+
+To depoloy your application follow this document => [Deploy an application on Heroku](https://github.com/DinaTaklit/HerokuSample/blob/master/README.md). he is a fast resume, after installing heroku, and heroku CLI
+
+1. `hroku login`to loggin into heroku
+2. Update requirements.txt each time you add dependency `pip freeze > requirements.txt`
+3. Setting up your environement varibales in `setup.sh`
+4. Install **Gunicorn** (a pure-Python HTTP server for WSGI applications used to deploy the app) => `pip install gunicorn`
+5. Create `Procfile` include one line to instruct Heroku correctly for us: `web: gunicorn app:app`. app is the  application's entry point var in th `main` module.
+6. To allow heroku run all your migrations to the database you have hosted on the platforme, your application need to include `manage.py` file. Create `manage.py` file that should contain the following code
+  
+  ```python
+  from flask_script import Manager
+  from flask_migrate import Migrate, MigrateCommand
+
+  from app import APP
+  from database.models import db
+
+  migrate = Migrate(APP, db)
+  manager = Manager(APP)
+
+  manager.add_command('db', MigrateCommand)
+
+
+  if __name__ == '__main__':
+      manager.run()
+
+  ```
+
+7. Istall those package to run the migrations
+
+  ```bash
+  pip install flask_script
+  pip install flask_migrate
+  pip install psycopg2-binary
+  ```
+
+> Remember to freeze the dependecies every after you installing those packages.
+
+8. Run our local migrations using our `manage.py` file, to mirror how Heroku will run behind the scenes for us when we deploy our app
+
+  ```bash
+  python manage.py db init
+  python manage.py db migrate
+  python manage.py db upgrade
+  ```
+
+9. Your file structure should contains those files
+  
+  ```bash
+  > migrations
+  .gitignore
+  app.py
+  manage.py
+  models.py
+  Procfile
+  requirements.text
+  Setup.sh
+  ```
+
+ > Note the versions folder under migrations is empty. Once you push this repo to git it will not included since it is empty. and once you deploy and try to run the last command for migration will got and error theire is no folder named versions. To avoid this issue create an empty inside migrations/versions folder `touch keep` so once you stage and push your work it will upload  also versions folder :).
+
+10. Crete heroku app => `heroku create name_of_your_app`
+    
+11. Add git remote for heroku to local repo that you get from the previous command or you can get it from heroku web site on by clicking on your app there and click on settings. You will find it there :). => `git remote add heroku heroku_git_url` 
+
+> If you the previous commend through an error fata remote already exsit because you created a previous app just run thsi commend and you fix the issue => `git remote set-url heroku heroku_git_url`
+
+12. Add postgresql add on for your database => `heroku addons:create heroku-postgresql:hobby-dev --app name_of_your_application`
+    
+> Run the under command to check your config vars in heroku `heroku config --app name_of_your_application`
+
+13. Push it :D. After you push everything to your git now push from git to heroku => `git push heroku master`
+
+> To check if you everthing is staged use `git status`
+
+14. Run migrations: Once your app is deployed, run migrations by running: `heroku run python manage.py db upgrade --app name_of_your_application`
+
+And that is it all. Congratulation :D. Now we have a live app :D. Open it from the heroku dashboard and see it live :D. Make additional requests using curl or Postman as you build your application and make more complex endpoints :).
 
 # API Reference 
 
