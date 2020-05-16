@@ -82,7 +82,30 @@ flask run --reload
 
 - The `--reload` flag will detect file changes and restart the server automatically.
 - Or you can directly run it with `python app.py` and everythin will be done automatically.
+
+> Note: To run the app and correctly you need to export all the global variables for the auth and token. To do so if you are in linux evn it is easy you have just to the setup bash script. But in windows to make things more easier do everything from bash.
+
+## Export global vars from Setup.sh
+
+In windows env to make things easier use git bash which allows you to run bash commend.
+
+1. Enable conda within git to do so add `conda.sh` to your **bach profile** or whatever the name of your bash profile.
+
+  ```bash
+  echo ". C:/Users/user/Anaconda3/etc/profile.d/conda.sh" >> ~/.bash_profile
+  ```
+
+  Now the conda should run in your git :D.
+
+2. Activate  your conda env in your git bash for ex `conda activate myenv`
+3. Run the script file using this commnad `. script.sh` wihting th folder where the script exists.
   
+Check those questions on stack overflow links for more details
+
+- [Anaconda and Git Bash in Windows - conda: command not found](https://stackoverflow.com/questions/54501167/anaconda-and-git-bash-in-windows-conda-command-not-found)
+  
+- [Running .sh script in Git Bash](https://stackoverflow.com/questions/36401147/running-sh-scripts-in-git-bash/61832248#61832248)
+
 ## Setup Auth0
 
 1. Create a new Auth0 Account
