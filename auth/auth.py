@@ -6,10 +6,11 @@ from urllib.request import urlopen
 
 import logging
 from logging import FileHandler, Formatter
+import os
 
-AUTH0_DOMAIN = 'coffee-shop-application.auth0.com'  # The domaine url 
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'capstone-app' # The api audiance
+AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN') # The domaine url 
+ALGORITHMS = os.getenv('ALGORITHMS') 
+API_AUDIENCE = os.getenv('API_AUDIENCE') # The api audiance
 
 ## Configure the logging
 logging.basicConfig(filename='error.log', level=logging.INFO,
