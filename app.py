@@ -40,7 +40,7 @@ def create_app(test_config=None):
 
     # ROUTES
     '''
-    @Done implement endpoint
+    Implement endpoint
         /
             it should be a public endpoint
         returns status code 200 and json
@@ -58,11 +58,11 @@ def create_app(test_config=None):
         })
 
     '''
-    @Done implement endpoint
+    Implement endpoint
         GET /actors
             it should require the 'get:actors' permission
         returns status code 200 and json {"success": True, "actors": actors}
-        where actors is the list of actors
+            where actors is the list of actors
             or appropriate status code indicating reason for failure
     '''
     @app.route('/actors')
@@ -79,11 +79,11 @@ def create_app(test_config=None):
         })
 
     '''
-    @Done implement endpoint
+    Implement endpoint
         GET /movies
             it should require the 'get:movies' permission
         returns status code 200 and json {"success": True, "movies": movies}
-        where movies is the list of movies
+            where movies is the list of movies
             or appropriate status code indicating reason for failure
     '''
     @app.route('/movies')
@@ -99,7 +99,7 @@ def create_app(test_config=None):
         })
 
     '''
-    @TODO implement endpoint
+    Implement endpoint
         POST /actors
             it should create a new row in the actors table
             it should require the 'post:actors' permission
@@ -132,7 +132,7 @@ def create_app(test_config=None):
             abort(422)
 
     '''
-    @TODO implement endpoint
+    Implement endpoint
         POST /movies
             it should create a new row in the movies table
             it should require the 'post:movies' permission
@@ -164,7 +164,7 @@ def create_app(test_config=None):
             abort(422)
 
     '''
-    @TODO implement endpoint
+    Implement endpoint
         PATCH /actors/<actor id>
             it should update an existing row in the actors table
             it should require the 'patch:actors' permission
@@ -205,14 +205,13 @@ def create_app(test_config=None):
             abort(422)
 
     '''
-    @TODO implement endpoint
-        PATCH /movies/<movie id>
-            it should update an existing row in the movies table
-            it should require the 'patch:movies' permission
-            it should contain the movie.get_movie data representation
-        returns status code 200 and json {"success": True, "movies": movie}
-            where movie an array containing only the updated movie
-            or appropriate status code indicating reason for failure
+    PATCH /movies/<movie id>
+        it should update an existing row in the movies table
+        it should require the 'patch:movies' permission
+        it should contain the movie.get_movie data representation
+    returns status code 200 and json {"success": True, "movies": movie}
+        where movie an array containing only the updated movie
+        or appropriate status code indicating reason for failure
     '''
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
     @requires_auth('patch:movies')
@@ -243,15 +242,14 @@ def create_app(test_config=None):
             abort(422)
 
     '''
-    @TODO implement endpoint
-        DELETE /actors/<id>
-            where <id> is the existing model id
-            it should respond with a 404 error if <id> is not found
-            it should delete the corresponding row for <id>
-            it should require the 'delete:actors' permission
-        returns status code 200 and json {"success": True, "deleted": id}
-            where id is the id of the deleted record
-            or appropriate status code indicating reason for failure
+    DELETE /actors/<id>
+        where <id> is the existing model id
+        it should respond with a 404 error if <id> is not found
+        it should delete the corresponding row for <id>
+        it should require the 'delete:actors' permission
+    returns status code 200 and json {"success": True, "deleted": id}
+        where id is the id of the deleted record
+        or appropriate status code indicating reason for failure
     '''
     @app.route('/actors/<actor_id>', methods=['DELETE'])
     @requires_auth('delete:actors')
@@ -270,15 +268,14 @@ def create_app(test_config=None):
             abort(422)
 
     '''
-    @TODO implement endpoint
-        DELETE /movies/<id>
-            where <id> is the existing model id
-            it should respond with a 404 error if <id> is not found
-            it should delete the corresponding row for <id>
-            it should require the 'delete:movies' permission
-        returns status code 200 and json {"success": True, "deleted": id}
-            where id is the id of the deleted record
-            or appropriate status code indicating reason for failure
+    DELETE /movies/<id>
+        where <id> is the existing model id
+        it should respond with a 404 error if <id> is not found
+        it should delete the corresponding row for <id>
+        it should require the 'delete:movies' permission
+    returns status code 200 and json {"success": True, "deleted": id}
+        where id is the id of the deleted record
+        or appropriate status code indicating reason for failure
     '''
     @app.route('/movies/<movie_id>', methods=['DELETE'])
     @requires_auth('delete:movies')
@@ -298,7 +295,7 @@ def create_app(test_config=None):
 
     # Error Handling
     '''
-    @Done implement error handlers using the @app.errorhandler(error) decorator
+    Implement error handlers using the @app.errorhandler(error) decorator
         each error handler should return (with approprate messages):
                 jsonify({
                         "success": False,
@@ -309,7 +306,7 @@ def create_app(test_config=None):
     '''
 
     '''
-    @Done implement error handler for 404
+    Implement error handler for 404
         error handler should conform to general task above
     '''
     @app.errorhandler(404)
@@ -321,7 +318,7 @@ def create_app(test_config=None):
         }), 404
 
     '''
-    @Done implement error handler for 400
+    Implement error handler for 400
     '''
     @app.errorhandler(400)
     def bad_request(error):
@@ -332,7 +329,7 @@ def create_app(test_config=None):
         }), 400
 
     '''
-    @Done implement error handler for 405
+    Implement error handler for 405
     '''
     @app.errorhandler(405)
     def not_allowed(error):
@@ -343,7 +340,7 @@ def create_app(test_config=None):
         }), 405
 
     '''
-    @Done implement error handler for 422
+    Implement error handler for 422
     '''
     @app.errorhandler(422)
     def unprocessable(error):
@@ -354,7 +351,7 @@ def create_app(test_config=None):
         }), 422
 
     '''
-    @Done implement error handler for AuthError
+    Implement error handler for AuthError
         error handler should conform to general task above
     '''
     @app.errorhandler(AuthError)
