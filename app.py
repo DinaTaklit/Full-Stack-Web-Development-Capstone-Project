@@ -1,9 +1,19 @@
 import os
-from flask import Flask, request, abort, jsonify
+from flask import (
+    Flask,
+    request,
+    jsonify,
+    abort
+)
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 
-from database.models import db_drop_and_create_all, setup_db, Movie, Actor
+from database.models import (
+    db_drop_and_create_all,
+    setup_db,
+    Movie,
+    Actor
+)
 from auth.auth import AuthError, requires_auth
 
 
@@ -36,6 +46,8 @@ def create_app(test_config=None):
         returns status code 200 and json
             {"success": True, "message": "hello world"}
             or appropriate status code indicating reason for failure
+        It is always good to show something at the root route
+        to show that the API is working!
     '''
 
     @app.route('/')
@@ -102,9 +114,9 @@ def create_app(test_config=None):
         body = request.get_json()
         if body is None:
             abort(404)
-        name = body.get('name', None)
-        age = body.get('age', None)
-        gender = body.get('gender', None)
+        name = body.get('name')
+        age = body.get('age')
+        gender = body.get('gender')
         # verify id there is no duplicate
         duplicate = Actor.query.filter(Actor.name == name).one_or_none()
         if duplicate is not None:
@@ -135,8 +147,8 @@ def create_app(test_config=None):
         body = request.get_json()
         if 'title' not in body:
             abort(404)
-        title = body.get('title', None)
-        release_date = body.get('release_date', None)
+        title = body.get('title')
+        release_date = body.get('release_date')
         # verify id there is no duplicate
         duplicate = Movie.query.filter(Movie.title == title).one_or_none()
         if duplicate is not None:
@@ -172,9 +184,9 @@ def create_app(test_config=None):
         if body is None:
             abort(404)
 
-        updated_name = body.get('name', None)
-        updated_age = body.get('age', None)
-        updated_gender = body.get('gender', None)
+        updated_name = body.get('name')
+        updated_age = body.get('age')
+        updated_gender = body.get('gender')
 
         if updated_name is not None:
             actor.name = updated_name
@@ -213,8 +225,8 @@ def create_app(test_config=None):
         if body is None:
             abort(404)
 
-        updated_title = body.get('title', None)
-        updated_release_date = body.get('release_date', None)
+        updated_title = body.get('title')
+        updated_release_date = body.get('release_date')
 
         if updated_title is not None:
             movie.title = updated_title
