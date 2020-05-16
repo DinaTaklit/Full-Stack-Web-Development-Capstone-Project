@@ -120,11 +120,24 @@ flask run --reload
     - Run the collection and correct any errors.
     - Export the collection overwriting the included one to be able to run with your own jwt :).
 
+> Note: to sign in and get the tokens for the diff roles type on your broser:
+> 
+> ```http
+> https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=token&client_id={{YOUR_CLIENT_ID}}&redirect_uri={{YOUR_CALLBACK_URI}}
+> ```
+> Like for example in my case:
+>```http
+>https://coffee-shop-application.auth0.com/authorize?audience=capstone-app&response_type=token&client_id=p1U7BG6MaJxHOSEJzrdNwFsVrC9CZjnR&redirect_uri=https://capstone-casting-agency-app.herokuapp.com/ 
+>```  
+
+
 ## Testing
 To run the tests, run
+
 ```
 python test_app.py
 ```
+
 # API Reference 
 
 ## Getting Started 
