@@ -43,7 +43,7 @@ a persistent movie entity, extends the base SQLAlchemy Model
 
 
 class Movie(db.Model):
-    __tablename__ = "movie"
+    __tablename__ = "movies"
     # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     # String Title
@@ -117,7 +117,7 @@ a persistent actor entity, extends the base SQLAlchemy Model
 
 
 class Actor(db.Model):
-    __tablename__ = "actor"
+    __tablename__ = "actors"
     # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     # String name
