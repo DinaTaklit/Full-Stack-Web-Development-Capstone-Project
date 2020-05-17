@@ -3,6 +3,7 @@ from sqlalchemy import Column, String, Integer, DateTime
 from flask_sqlalchemy import SQLAlchemy
 import json
 import datetime
+from dataclasses import dataclass
 
 # database_filename = "database.db"
 # project_dir = os.path.dirname(os.path.abspath(__file__))
@@ -37,34 +38,12 @@ def db_drop_and_create_all():
 
 
 '''
-Movie
-a persistent movie entity, extends the base SQLAlchemy Model
+Extend the base Model class to add common methods
 '''
 
 
-class Movie(db.Model):
-    __tablename__ = "movies"
-    # Autoincrementing, unique primary key
-    id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
-    # String Title
-    title = Column(String(80), nullable=False)
-    # Release date
-    release_date = Column(DateTime, nullable=False,
-                          default=datetime.datetime.utcnow)
-    # Define parent-child relationship betw the Movie and Actor
-    actors = db.relationship("Actor", backref="movie")
-
-    '''
-    get_movie(self)
-        json form representation of the Movie model
-    '''
-
-    def get_movie(self):
-        return {
-            "id": self.id,
-            "title": self.title,
-            "release_date": self.release_date
-        }
+class inheritedCastingModels(db.Model):
+    __abstract__ = True
 
     '''
     insert()
@@ -106,6 +85,45 @@ class Movie(db.Model):
     def update(self):
         db.session.commit()
 
+
+'''
+Movie
+a persistent movie entity, extends the base SQLAlchemy Model
+'''
+
+
+@dataclass
+class Movie(inheritedCastingModels):
+
+    id: int
+    title: String
+    release_date: DateTime
+    actors: int
+
+    __tablename__ = "movies"
+
+    # Autoincrementing, unique primary key
+    id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
+    # String Title
+    title = Column(String(80), nullable=False)
+    # Release date
+    release_date = Column(DateTime, nullable=False,
+                          default=datetime.datetime.utcnow)
+    # Define parent-child relationship betw the Movie and Actor
+    actors = db.relationship("Actor", backref="movies")
+
+    '''
+    get_movie(self)
+        json form representation of the Movie model
+    '''
+
+    def get_movie(self):
+        return {
+            "id": self.id,
+            "title": self.title,
+            "release_date": self.release_date
+        }
+
     def __repr__(self):
         return json.dumps(self.get_movie())
 
@@ -116,8 +134,16 @@ a persistent actor entity, extends the base SQLAlchemy Model
 '''
 
 
-class Actor(db.Model):
+@dataclass
+class Actor(inheritedCastingModels):
+    id: int
+    name: String
+    age: int
+    gender: String
+    movie_id: int
+
     __tablename__ = "actors"
+
     # Autoincrementing, unique primary key
     id = Column(Integer().with_variant(Integer, "sqlite"), primary_key=True)
     # String name
@@ -127,7 +153,7 @@ class Actor(db.Model):
     # String gender
     gender = Column(String(80), nullable=False)
     # Add movie as foreight key for actor model
-    movie_id = Column(Integer(), db.ForeignKey("movie.id"))
+    movie_id = Column(Integer(), db.ForeignKey("movies.id"))
 
     '''
     get_actor(self)
@@ -141,36 +167,6 @@ class Actor(db.Model):
             'age': self.age,
             'gender': self.gender
         }
-
-    '''
-    insert()
-        inserts a new model into a database
-        the model must have a unique name
-        the model must have a unique id or null id
-    '''
-
-    def insert(self):
-        db.session.add(self)
-        db.session.commit()
-
-    '''
-    delete()
-        deletes a new model into a database
-        the model must exist in the database
-    '''
-
-    def delete(self):
-        db.session.delete(self)
-        db.session.commit()
-
-    '''
-    update()
-        updates a new model into a database
-        the model must exist in the database
-    '''
-
-    def update(self):
-        db.session.commit()
 
     def __repr__(self):
         return json.dumps(self.get_actor())
