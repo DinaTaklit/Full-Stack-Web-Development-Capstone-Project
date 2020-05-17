@@ -4,10 +4,10 @@ from flask_sqlalchemy import SQLAlchemy
 import json
 import datetime
 
-database_filename = "database.db"
-project_dir = os.path.dirname(os.path.abspath(__file__))
-database_path = "sqlite:///{}".format(
-    os.path.join(project_dir, database_filename))
+# database_filename = "database.db"
+# project_dir = os.path.dirname(os.path.abspath(__file__))
+# database_path = "sqlite:///{}".format(
+#     os.path.join(project_dir, database_filename))
 
 db = SQLAlchemy()
 
@@ -17,9 +17,7 @@ setup_db(app)
 '''
 
 
-def setup_db(app, database_path=database_path):
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+def setup_db(app):
     db.app = app
     db.init_app(app)
 
